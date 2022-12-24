@@ -706,7 +706,7 @@ RageSurface* RageDisplay_D3D::CreateScreenshot()
 
 ActualVideoModeParams RageDisplay_D3D::GetActualVideoModeParams() const
 {
-	return GraphicsWindow::GetParams();
+	return ActualVideoModeParams{GraphicsWindow::GetParams()};
 }
 
 void RageDisplay_D3D::SendCurrentMatrices()
@@ -1292,7 +1292,7 @@ void RageDisplay_D3D::SetMaterial(
 		c.r += emissive.r + ambient.r;
 		c.g += emissive.g + ambient.g;
 		c.b += emissive.b + ambient.b;
-		RageVColor c2 = c;
+		RageVColor c2{c};
 		DWORD c3 = *(DWORD*)&c2;
 		g_pd3dDevice->SetRenderState( D3DRS_TEXTUREFACTOR, c3 );
 	}

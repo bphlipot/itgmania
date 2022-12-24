@@ -208,7 +208,7 @@ void Bookkeeper::GetCoinsLastDays( int coins[NUM_LAST_DAYS] ) const
 	for( int i=0; i<NUM_LAST_DAYS; i++ )
 	{
 		tm EndTime = AddDays( time, +1 );
-		coins[i] = GetNumCoins( time, EndTime );
+		coins[i] = GetNumCoins( Date{time}, Date{EndTime} );
 		time = GetYesterday( time );
 	}
 }
@@ -225,7 +225,7 @@ void Bookkeeper::GetCoinsLastWeeks( int coins[NUM_LAST_WEEKS] ) const
 	for( int w=0; w<NUM_LAST_WEEKS; w++ )
 	{
 		tm StartTime = AddDays( time, -DAYS_IN_WEEK );
-		coins[w] = GetNumCoins( StartTime, time );
+		coins[w] = GetNumCoins( Date{StartTime}, Date{time} );
 		time = StartTime;
 	}
 }

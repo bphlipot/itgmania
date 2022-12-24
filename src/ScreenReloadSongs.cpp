@@ -16,7 +16,7 @@ class ScreenReloadSongsLoadingWindow: public LoadingWindow
 	BitmapText &m_BitmapText;
 
 public:
-	ScreenReloadSongsLoadingWindow( BitmapText &bt ):
+	explicit ScreenReloadSongsLoadingWindow( BitmapText &bt ):
 		m_BitmapText(bt)
 	{
 	}

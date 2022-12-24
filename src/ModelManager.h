@@ -13,7 +13,7 @@ struct ModelManagerPrefs
 	{
 		m_bDelayedUnload = false;
 	}
-	ModelManagerPrefs( bool bDelayedUnload )
+	explicit ModelManagerPrefs( bool bDelayedUnload )
 	{
 		m_bDelayedUnload = bDelayedUnload;
 	}

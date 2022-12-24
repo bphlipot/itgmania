@@ -141,9 +141,9 @@ typedef char TCHAR;
 	}
 
 
-typedef unsigned char uch;      // unsigned 8-bit value
-typedef unsigned short ush;     // unsigned 16-bit value
-typedef unsigned long ulg;      // unsigned 32-bit value
+typedef uint8_t uch;      // unsigned 8-bit value
+typedef uint16_t ush;     // unsigned 16-bit value
+typedef uint32_t ulg;      // unsigned 32-bit value
 typedef size_t extent;          // file size
 typedef unsigned Pos;   // must be at least 32 bits
 typedef unsigned IPos; // A Pos is an index in the character window. Pos is used only for parameter passing
@@ -535,7 +535,11 @@ ulg crc32(ulg crc, const uch *buf, size_t len)
 	if (buf== nullptr) return 0L;
 	crc = crc ^ 0xffffffffL;
 	while (len >= 8) {DO8(buf); len -= 8;}
-	if (len) do {DO1(buf);} while (--len);
+	if (len) {
+		do {
+			DO1(buf);
+		} while (--len);
+	}
 	return crc ^ 0xffffffffL;  // (instead of ~c for 64-bit machines)
 }
 
@@ -571,7 +575,7 @@ public:
 	// I haven't done it object-orientedly here, just put them all
 	// together, since OO didn't seem to make the design any clearer.
 	ulg attr; iztimes times; ulg timestamp;  // all open_* methods set these
-	long isize,ired;         // size is not set until close() on pips
+	int32_t isize,ired;         // size is not set until close() on pips
 	ulg crc;                                 // crc is not set until close(). iwrit is cumulative
 	RageFile *hfin;           // for input files and pipes
 	const char *bufin; unsigned int lenin,posin; // for memory
@@ -590,7 +594,7 @@ public:
 	ZRESULT ideflate(TZipFileInfo *zfi);
 	ZRESULT istore();
 
-	ZRESULT Add(const TCHAR *odstzn, const TCHAR *src, unsigned long flags);
+	ZRESULT Add(const TCHAR *odstzn, const TCHAR *src, uint32_t flags);
 	ZRESULT AddCentral();
 
 };
@@ -692,16 +696,16 @@ ZRESULT TZip::open_dir()
 }
 
 
-void filetime2dosdatetime(const tm st, unsigned short *dosdate,unsigned short *dostime)
+void filetime2dosdatetime(const tm st, uint16_t *dosdate,uint16_t *dostime)
 {
 	// date: bits 0-4 are day of month 1-31. Bits 5-8 are month 1..12. Bits 9-15 are year-1980
 	// time: bits 0-4 are seconds/2, bits 5-10 are minute 0..59. Bits 11-15 are hour 0..23
-	*dosdate = (unsigned short)(((st.tm_year+1900-1980)&0x7f) << 9);
-	*dosdate |= (unsigned short)(((st.tm_mon+1)&0xf) << 5);
-	*dosdate |= (unsigned short)((st.tm_mday&0x1f));
-	*dostime = (unsigned short)((st.tm_hour&0x1f) << 11);
-	*dostime |= (unsigned short)((st.tm_min&0x3f) << 5);
-	*dostime |= (unsigned short)((st.tm_sec*2)&0x1f);
+	*dosdate = (uint16_t)(((st.tm_year+1900-1980)&0x7f) << 9);
+	*dosdate |= (uint16_t)(((st.tm_mon+1)&0xf) << 5);
+	*dosdate |= (uint16_t)((st.tm_mday&0x1f));
+	*dostime = (uint16_t)((st.tm_hour&0x1f) << 11);
+	*dostime |= (uint16_t)((st.tm_min&0x3f) << 5);
+	*dostime |= (uint16_t)((st.tm_sec*2)&0x1f);
 }
 
 ZRESULT TZip::set_times()
@@ -711,12 +715,12 @@ ZRESULT TZip::set_times()
 	time ( &rawtime );
 	ptm = localtime ( &rawtime );
 
-	unsigned short dosdate,dostime;
+	uint16_t dosdate,dostime;
 	filetime2dosdatetime(*ptm,&dosdate,&dostime);
 	times.atime = time(nullptr);
 	times.mtime = times.atime;
 	times.ctime = times.atime;
-	timestamp = (unsigned short)dostime | (((unsigned long)dosdate)<<16);
+	timestamp = (uint16_t)dostime | (((uint32_t)dosdate)<<16);
 	return ZR_OK;
 }
 
@@ -785,7 +789,7 @@ ZRESULT TZip::istore()
 
 
 bool has_seeded=false;
-ZRESULT TZip::Add(const TCHAR *odstzn, const TCHAR *src,unsigned long flags)
+ZRESULT TZip::Add(const TCHAR *odstzn, const TCHAR *src,uint32_t flags)
 {
 	if (oerr)
 		return ZR_FAILED;

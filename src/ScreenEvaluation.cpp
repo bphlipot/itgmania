@@ -410,14 +410,14 @@ void ScreenEvaluation::Init()
 					actual /= possible;
 					possible /= possible;
 				}
-				m_sprPossibleBar[p][r].Load( THEME->GetPathG(m_sName,ssprintf("BarPossible p%d",p+1)) );
+				m_sprPossibleBar[p][r].Load( RageTextureID{THEME->GetPathG(m_sName,ssprintf("BarPossible p%d",p+1))} );
 				m_sprPossibleBar[p][r].SetWidth( m_sprPossibleBar[p][r].GetUnzoomedWidth() * possible * fDivider );
 				m_sprPossibleBar[p][r].SetName( ssprintf("BarPossible%dP%d",r+1,p+1) );
 				ActorUtil::LoadAllCommands( m_sprPossibleBar[p][r], m_sName );
 				SET_XY( m_sprPossibleBar[p][r] );
 				this->AddChild( &m_sprPossibleBar[p][r] );
 
-				m_sprActualBar[p][r].Load( THEME->GetPathG(m_sName,ssprintf("BarActual p%d",p+1)) );
+				m_sprActualBar[p][r].Load( RageTextureID{THEME->GetPathG(m_sName,ssprintf("BarActual p%d",p+1))} );
 				// should be out of the possible bar, not actual (whatever value that is at)
 				m_sprActualBar[p][r].SetWidth( m_sprPossibleBar[p][r].GetUnzoomedWidth() * actual * fDivider );
 
@@ -470,7 +470,7 @@ void ScreenEvaluation::Init()
 			SET_XY( m_sprWinFrame[p] );
 			this->AddChild( m_sprWinFrame[p] );
 
-			m_sprWin[p].Load( THEME->GetPathG(m_sName,ssprintf("win p%d 1x3",p+1)) );
+			m_sprWin[p].Load( RageTextureID{THEME->GetPathG(m_sName,ssprintf("win p%d 1x3",p+1))} );
 			m_sprWin[p].StopAnimating();
 			int iFrame = GAMESTATE->GetStageResult( p );
 			m_sprWin[p].SetState( iFrame );

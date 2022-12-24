@@ -84,7 +84,7 @@ public:
 	void FadeToActualBrightness() { m_Brightness.FadeToActualBrightness(); }
 	void SetBrightness( float fBrightness ) { m_Brightness.Set(fBrightness); } /* overrides pref and Cover */
 
-	DancingCharacters* GetDancingCharacters() { return m_pDancingCharacters; };
+	DancingCharacters* GetDancingCharacters() { return m_pDancingCharacters; }
 
 	void GetLoadedBackgroundChanges( std::vector<BackgroundChange> *pBackgroundChangesOut[NUM_BackgroundLayer] );
 

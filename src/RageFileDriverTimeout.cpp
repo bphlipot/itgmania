@@ -70,7 +70,7 @@ enum ThreadRequest
 class ThreadedFileWorker: public RageWorkerThread
 {
 public:
-	ThreadedFileWorker( RString sPath );
+	explicit ThreadedFileWorker( RString sPath );
 	~ThreadedFileWorker();
 
 	/* Threaded operations.  If a file operation times out, the caller loses all access

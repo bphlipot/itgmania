@@ -254,8 +254,8 @@ void MusicWheel::BeginScreen()
 MusicWheel::~MusicWheel()
 {
 	FOREACH_ENUM( SortOrder, so ) {
-		std::vector<MusicWheelItemData*>::iterator i = m__UnFilteredWheelItemDatas[so].begin();
-		std::vector<MusicWheelItemData*>::iterator iEnd = m__UnFilteredWheelItemDatas[so].end();
+		std::vector<MusicWheelItemData*>::iterator i = m_UnFilteredWheelItemDatas[so].begin();
+		std::vector<MusicWheelItemData*>::iterator iEnd = m_UnFilteredWheelItemDatas[so].end();
 		for( ; i != iEnd; ++i ) {
 			delete *i;
 		}
@@ -890,19 +890,19 @@ void MusicWheel::BuildWheelItemDatas( std::vector<MusicWheelItemData *> &arrayWh
 std::vector<MusicWheelItemData *> & MusicWheel::getWheelItemsData(SortOrder so) {
 	// Update the popularity and init icons.
 	readyWheelItemsData(so);	
-	return m__WheelItemDatas[so];
+	return m_WheelItemDatas[so];
 }
 
 void MusicWheel::readyWheelItemsData(SortOrder so) {
 	if(m_WheelItemDatasStatus[so]!=VALID) {
 		RageTimer timer;
 
-		std::vector<MusicWheelItemData*> &aUnFilteredDatas = m__UnFilteredWheelItemDatas[so];
+		std::vector<MusicWheelItemData*> &aUnFilteredDatas = m_UnFilteredWheelItemDatas[so];
 
 		if(m_WheelItemDatasStatus[so]==INVALID) {
 			BuildWheelItemDatas(  aUnFilteredDatas, so );
 		}
-		FilterWheelItemDatas( aUnFilteredDatas, m__WheelItemDatas[so], so );
+		FilterWheelItemDatas( aUnFilteredDatas, m_WheelItemDatas[so], so );
 		m_WheelItemDatasStatus[so]=VALID;
 
 		LOG->Trace( "MusicWheel sorting took: %f", timer.GetTimeSinceStart() );

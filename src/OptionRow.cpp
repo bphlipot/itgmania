@@ -416,9 +416,11 @@ void OptionRow::AfterImportOptions( PlayerNumber pn )
 		m_textItems[pn]->SetVisible( GAMESTATE->IsHumanPlayer(pn) );
 
 	// Hide underlines for disabled players.
-	if( !GAMESTATE->IsHumanPlayer(pn) )
-		for( unsigned c=0; c<m_Underline[pn].size(); c++ )
+	if( !GAMESTATE->IsHumanPlayer(pn) ) {
+		for( unsigned c=0; c<m_Underline[pn].size(); c++ ) {
 			m_Underline[pn][c]->SetVisible( false );
+		}
+	}
 
 	// Make all selections the same if bOneChoiceForAllPlayers.
 	// Hack: we only import active players, so if only player 2 is imported,

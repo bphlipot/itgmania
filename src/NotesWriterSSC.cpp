@@ -39,7 +39,7 @@ struct TimingTagWriter {
 	std::vector<RString> *m_pvsLines;
 	RString m_sNext;
 
-	TimingTagWriter( std::vector<RString>* pvsLines ): m_pvsLines (pvsLines) { }
+	explicit TimingTagWriter( std::vector<RString>* pvsLines ): m_pvsLines (pvsLines) { }
 
 	void Write( const int row, const char *value )
 	{
@@ -51,7 +51,7 @@ struct TimingTagWriter {
 	void Write( const int row, const int value )          { Write( row, ssprintf( "%d",    value ) ); }
 	void Write( const int row, const int a, const int b ) { Write( row, ssprintf( "%d=%d", a, b ) );  }
 	void Write( const int row, const float a, const float b ) { Write( row, ssprintf( "%.6f=%.6f", a, b) ); }
-	void Write( const int row, const float a, const float b, const unsigned short c )
+	void Write( const int row, const float a, const float b, const uint16_t c )
 		{ Write( row, ssprintf( "%.6f=%.6f=%hd", a, b, c) ); }
 
 	void Init( const RString sTag ) { m_sNext = "#" + sTag + ":"; }

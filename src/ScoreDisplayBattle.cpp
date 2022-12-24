@@ -15,7 +15,7 @@ ScoreDisplayBattle::ScoreDisplayBattle()
 {
 	LOG->Trace( "ScoreDisplayBattle::ScoreDisplayBattle()" );
 
-	m_sprFrame.Load( THEME->GetPathG("ScoreDisplayBattle","frame") );
+	m_sprFrame.Load( RageTextureID{THEME->GetPathG("ScoreDisplayBattle","frame")} );
 	this->AddChild( &m_sprFrame );
 
 	for( int i=0; i<NUM_INVENTORY_SLOTS; i++ )
@@ -28,7 +28,7 @@ ScoreDisplayBattle::ScoreDisplayBattle()
 	std::vector<RString> asIconPaths;
 	GetDirListing( THEME->GetCurThemeDir()+"Graphic/ScoreDisplayBattle icon*", asIconPaths );
 	for( unsigned j=0; j<asIconPaths.size(); j++ )
-		m_TexturePreload.Load( asIconPaths[j] );
+		m_TexturePreload.Load( RageTextureID{asIconPaths[j]} );
 }
 
 void ScoreDisplayBattle::Init( const PlayerState* pPlayerState, const PlayerStageStats* pPlayerStageStats )
@@ -56,7 +56,7 @@ void ScoreDisplayBattle::Update( float fDelta )
 			else
 			{
 				// TODO:  Cache all of the icon graphics so we don't load them dynamically from disk.
-				m_ItemIcon[s].Load( THEME->GetPathG("ScoreDisplayBattle","icon "+sNewModifier) );
+				m_ItemIcon[s].Load( RageTextureID{THEME->GetPathG("ScoreDisplayBattle","icon "+sNewModifier)} );
 				m_ItemIcon[s].StopTweening();
 				apActorCommands acmds = ActorUtil::ParseActorCommands(
 					"diffuse,1,1,1,1;zoom,1;"

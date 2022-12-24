@@ -6,7 +6,7 @@
 #include "RageSound.h"
 
 /** @brief The number of sounds allowed for testing. */
-const int nsounds = 5;
+inline constexpr int nsounds = 5;
 
 class ScreenTestSound : public Screen
 {
@@ -23,8 +23,8 @@ public:
 		RageSound s;
 		BitmapText txt;
 	};
-	Sound s[nsounds];
-	std::vector<RageSound*> m_sSoundCopies[nsounds];
+	std::array<Sound, nsounds> s;
+	std::array<std::vector<RageSound*>, nsounds> m_sSoundCopies;
 	BitmapText HEEEEEEEEELP;
 	
 	int selected;

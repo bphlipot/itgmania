@@ -8,12 +8,12 @@
 class RageBitmapTexture : public RageTexture
 {
 public:
-	RageBitmapTexture( RageTextureID name );
+	explicit RageBitmapTexture( RageTextureID name );
 	virtual ~RageBitmapTexture();
 	/* only called by RageTextureManager::InvalidateTextures */
 	virtual void Invalidate() { m_uTexHandle = 0; /* don't Destroy() */}
 	virtual void Reload();
-	virtual uintptr_t GetTexHandle() const { return m_uTexHandle; };	// accessed by RageDisplay
+	virtual uintptr_t GetTexHandle() const { return m_uTexHandle; }	// accessed by RageDisplay
 
 private:
 	void Create();	// called by constructor and Reload

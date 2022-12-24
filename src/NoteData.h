@@ -166,7 +166,7 @@ public:
 
 	// Mina stuf (Used for chartkey hashing)
 	void LogNonEmptyRows();
-	std::vector<int>& GetNonEmptyRowVector() { return NonEmptyRowVector; };
+	std::vector<int>& GetNonEmptyRowVector() { return NonEmptyRowVector; }
 
 	int GetNumTracks() const { return m_TapNotes.size(); }
 	void SetNumTracks( int iNewNumTracks );

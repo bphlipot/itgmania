@@ -34,7 +34,7 @@ public:
 	virtual ~ActorMultiVertex();
 
 	void LoadFromNode( const XNode* Node ) override;
-	virtual ActorMultiVertex *Copy() const override;
+	ActorMultiVertex *Copy() const override;
 
 	struct AMV_TweenState
 	{
@@ -68,10 +68,10 @@ public:
 	}
 	const AMV_TweenState& AMV_DestTweenState() const { return const_cast<ActorMultiVertex*>(this)->AMV_DestTweenState(); }
 
-	virtual void EnableAnimation(bool bEnable) override;
-	virtual void Update(float fDelta) override;
-	virtual bool EarlyAbortDraw() const override;
-	virtual void DrawPrimitives() override;
+	void EnableAnimation(bool bEnable) override;
+	void Update(float fDelta) override;
+	bool EarlyAbortDraw() const override;
+	void DrawPrimitives() override;
 	virtual void DrawInternal( const AMV_TweenState *TS );
 	
 	void SetCurrentTweenStart() override;
@@ -83,7 +83,7 @@ public:
 	void FinishTweening() override;
 	
 	void SetTexture( RageTexture *Texture );
-	RageTexture* GetTexture() { return _Texture; };
+	RageTexture* GetTexture() { return _Texture; }
 	void LoadFromTexture( RageTextureID ID );
 
 	void UnloadTexture();
@@ -148,7 +148,7 @@ public:
 	bool _use_animation_state;
 	bool _decode_movie;
 
-	virtual void PushSelf( lua_State *L ) override;
+	void PushSelf( lua_State *L ) override;
 
 private:
 	RageTexture* _Texture;

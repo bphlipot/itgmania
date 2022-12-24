@@ -112,9 +112,9 @@ REGISTER_ACTOR_CLASS( GraphLine );
 class GraphBody: public Actor
 {
 public:
-	GraphBody( RString sFile )
+	explicit GraphBody( RString sFile )
 	{
-		m_pTexture = TEXTUREMAN->LoadTexture( sFile );
+		m_pTexture = TEXTUREMAN->LoadTexture( RageTextureID{sFile} );
 
 		for( int i = 0; i < 2*VALUE_RESOLUTION; ++i )
 		{

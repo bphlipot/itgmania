@@ -723,10 +723,10 @@ bool PlayerOptions::FromOneModString( const RString &sOneMod, RString &sErrorOut
 	}
 	else if( sBit.find("modtimer") != sBit.npos)
 	{
-	    if( sBit == "modtimerdefault" )			{ m_ModTimerType= ModTimerType_Default; }
-	    else if( sBit == "modtimersong" )			{ m_ModTimerType= ModTimerType_Song; }
-	    else if( sBit == "modtimerbeat" )			{ m_ModTimerType= ModTimerType_Beat; }
-	    else if( sBit == "modtimergame" )			{ m_ModTimerType= ModTimerType_Game; }
+	    if( sBit == "modtimerdefault" )			m_ModTimerType= ModTimerType_Default;
+	    else if( sBit == "modtimersong" )			m_ModTimerType= ModTimerType_Song;
+	    else if( sBit == "modtimerbeat" )			m_ModTimerType= ModTimerType_Beat;
+	    else if( sBit == "modtimergame" )			m_ModTimerType= ModTimerType_Game;
 	    else if( sBit == "modtimermult" )			SET_FLOAT( fModTimerMult )
 	    else if( sBit == "modtimeroffset" )			SET_FLOAT( fModTimerOffset )
 	}
@@ -735,12 +735,12 @@ bool PlayerOptions::FromOneModString( const RString &sOneMod, RString &sErrorOut
 	    if( sBit == "drawsize" )				SET_FLOAT( fDrawSize )
 	    else if( sBit == "drawsizeback" )			SET_FLOAT( fDrawSizeBack )
 	}
-	else if( sBit == "bar" ) { m_LifeType= LifeType_Bar; }
-	else if( sBit == "battery" ) { m_LifeType= LifeType_Battery; }
-	else if( sBit == "lifetime" ) { m_LifeType= LifeType_Time; }
-	else if( sBit == "norecover" || sBit == "power-drop" ) { m_DrainType= DrainType_NoRecover; }
-	else if( sBit == "suddendeath" || sBit == "death" ) { m_DrainType= DrainType_SuddenDeath; }
-	else if( sBit == "normal-drain" ) { m_DrainType= DrainType_Normal; }
+	else if( sBit == "bar" ) 	m_LifeType= LifeType_Bar;
+	else if( sBit == "battery" ) 	m_LifeType= LifeType_Battery;
+	else if( sBit == "lifetime" ) 	m_LifeType= LifeType_Time;
+	else if( sBit == "norecover" || sBit == "power-drop" ) 	m_DrainType= DrainType_NoRecover;
+	else if( sBit == "suddendeath" || sBit == "death" ) 	m_DrainType= DrainType_SuddenDeath;
+	else if( sBit == "normal-drain" ) 			m_DrainType= DrainType_Normal;
 	else if( sBit == "boost" )				SET_FLOAT( fAccels[ACCEL_BOOST] )
 	else if( sBit == "brake" || sBit == "land" )		SET_FLOAT( fAccels[ACCEL_BRAKE] )
 	else if( sBit.find("wave") != sBit.npos)

@@ -63,10 +63,7 @@ struct CubicSplineN
 	void redimension(size_t d);
 	size_t dimension() const;
 	bool empty() const;
-	float get_max_t() const {
-		if(m_loop) { return static_cast<float>(size()); }
-		else { return static_cast<float>(size()-1); }
-	}
+	float get_max_t() const { return static_cast<float>(m_loop ? size() : size() - 1); }
 	typedef std::vector<CubicSpline> spline_cont_t;
 	void set_loop(bool l);
 	bool get_loop() const;

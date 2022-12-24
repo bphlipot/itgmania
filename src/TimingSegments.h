@@ -53,8 +53,8 @@ struct TimingSegment
 	virtual void DebugPrint() const;
 
 	// don't allow base TimingSegments to be instantiated directly
-	TimingSegment( int iRow = ROW_INVALID ) : m_iStartRow(iRow) { }
-	TimingSegment( float fBeat ) : m_iStartRow(ToNoteRow(fBeat)) { }
+	explicit TimingSegment( int iRow = ROW_INVALID ) : m_iStartRow(iRow) { }
+	explicit TimingSegment( float fBeat ) : m_iStartRow(ToNoteRow(fBeat)) { }
 
 	TimingSegment(const TimingSegment &other) :
 		m_iStartRow( other.GetRow() ) { }
@@ -140,7 +140,7 @@ struct FakeSegment : public TimingSegment
 		TimingSegment(iStartRow), m_iLengthRows(ToNoteRow(fBeats)) { }
 
 	FakeSegment( const FakeSegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_iLengthRows( other.GetLengthRows() ) { }
 
 	int GetLengthRows() const { return m_iLengthRows; }
@@ -193,7 +193,7 @@ struct WarpSegment : public TimingSegment
 	WarpSegment() : TimingSegment(), m_iLengthRows(0) { }
 
 	WarpSegment( const WarpSegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_iLengthRows( other.GetLengthRows() ) { }
 
 	WarpSegment( int iStartRow, int iLengthRows ) :
@@ -255,11 +255,11 @@ struct TickcountSegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new TickcountSegment(*this); }
 
-	TickcountSegment( int iStartRow = ROW_INVALID, int iTicks = DEFAULT_TICK_COUNT ) :
+	explicit TickcountSegment( int iStartRow = ROW_INVALID, int iTicks = DEFAULT_TICK_COUNT ) :
 		TimingSegment(iStartRow), m_iTicksPerBeat(iTicks) { }
 
 	TickcountSegment( const TickcountSegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_iTicksPerBeat( other.GetTicks() ) { }
 
 	int GetTicks() const { return m_iTicksPerBeat; }
@@ -302,12 +302,12 @@ struct ComboSegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new ComboSegment(*this); }
 
-	ComboSegment( int iStartRow = ROW_INVALID, int iCombo = 1, int iMissCombo = 1 ) :
+	explicit ComboSegment( int iStartRow = ROW_INVALID, int iCombo = 1, int iMissCombo = 1 ) :
 		TimingSegment(iStartRow), m_iCombo(iCombo),
 		m_iMissCombo(iMissCombo) { }
 
 	ComboSegment(const ComboSegment &other) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_iCombo( other.GetCombo() ),
 		m_iMissCombo( other.GetMissCombo() ) { }
 
@@ -359,11 +359,11 @@ struct LabelSegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new LabelSegment(*this); }
 
-	LabelSegment( int iStartRow = ROW_INVALID, const RString& sLabel = RString() ) :
+	explicit LabelSegment( int iStartRow = ROW_INVALID, const RString& sLabel = RString() ) :
 		TimingSegment(iStartRow), m_sLabel(sLabel) { }
 
 	LabelSegment(const LabelSegment &other) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_sLabel( other.GetLabel() ) { }
 
 	const RString& GetLabel() const { return m_sLabel; }
@@ -405,11 +405,11 @@ struct BPMSegment : public TimingSegment
 	TimingSegment* Copy() const { return new BPMSegment(*this); }
 
 	// note that this takes a BPM, not a BPS (compatibility)
-	BPMSegment( int iStartRow = ROW_INVALID, float fBPM = 0.0f ) :
+	explicit BPMSegment( int iStartRow = ROW_INVALID, float fBPM = 0.0f ) :
 		TimingSegment(iStartRow) { SetBPM(fBPM); }
 
 	BPMSegment( const BPMSegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_fBPS( other.GetBPS() ) { }
 
 	float GetBPS() const { return m_fBPS; }
@@ -463,7 +463,7 @@ struct TimeSignatureSegment : public TimingSegment
 		m_iDenominator(iDenom) { }
 
 	TimeSignatureSegment( const TimeSignatureSegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_iNumerator( other.GetNum() ),
 		m_iDenominator( other.GetDen() ) { }
 
@@ -541,7 +541,7 @@ struct SpeedSegment : public TimingSegment
 		m_Unit(unit) { }
 
 	SpeedSegment(const SpeedSegment &other) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_fRatio( other.GetRatio() ),
 		m_fDelay( other.GetDelay() ),
 		m_Unit( other.GetUnit() ) { }
@@ -607,11 +607,11 @@ struct ScrollSegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new ScrollSegment(*this); }
 
-	ScrollSegment( int iStartRow = ROW_INVALID, float fRatio = 1.0f ) :
+	explicit ScrollSegment( int iStartRow = ROW_INVALID, float fRatio = 1.0f ) :
 		TimingSegment(iStartRow), m_fRatio(fRatio) { }
 
 	ScrollSegment(const ScrollSegment &other) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_fRatio( other.GetRatio() ) { }
 
 	float GetRatio() const { return m_fRatio; }
@@ -652,11 +652,11 @@ struct StopSegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new StopSegment(*this); }
 
-	StopSegment( int iStartRow = ROW_INVALID, float fSeconds = 0.0f ) :
+	explicit StopSegment( int iStartRow = ROW_INVALID, float fSeconds = 0.0f ) :
 		TimingSegment(iStartRow), m_fSeconds(fSeconds) { }
 
 	StopSegment (const StopSegment &other) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_fSeconds( other.GetPause() ) { }
 
 	float GetPause() const { return m_fSeconds; }
@@ -696,11 +696,11 @@ struct DelaySegment : public TimingSegment
 
 	TimingSegment* Copy() const { return new DelaySegment(*this); }
 
-	DelaySegment( int iStartRow = ROW_INVALID, float fSeconds = 0 ) :
+	explicit DelaySegment( int iStartRow = ROW_INVALID, float fSeconds = 0 ) :
 		TimingSegment(iStartRow), m_fSeconds(fSeconds) { }
 
 	DelaySegment( const DelaySegment &other ) :
-		TimingSegment( other.GetRow() ),
+		TimingSegment( other ),
 		m_fSeconds( other.GetPause() ) { }
 
 	float GetPause() const { return m_fSeconds; }

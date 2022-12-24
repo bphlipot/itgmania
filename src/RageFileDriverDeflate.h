@@ -40,7 +40,7 @@ class RageFileObjDeflate: public RageFileObj
 {
 public:
 	/* By default, pFile will not be freed. */
-	RageFileObjDeflate( RageFileBasic *pOutput );
+	explicit RageFileObjDeflate( RageFileBasic *pOutput );
 	~RageFileObjDeflate();
 
 	int GetFileSize() const { return m_pFile->GetFileSize(); }
@@ -59,7 +59,7 @@ protected:
 class RageFileObjGzip: public RageFileObjDeflate
 {
 public:
-	RageFileObjGzip( RageFileBasic *pFile );
+	explicit RageFileObjGzip( RageFileBasic *pFile );
 	int Start();
 	int Finish();
 

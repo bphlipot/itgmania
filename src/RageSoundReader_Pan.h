@@ -3,12 +3,13 @@
 #ifndef RAGE_SOUND_READER_PAN_H
 #define RAGE_SOUND_READER_PAN_H
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 
 class RageSoundReader_Pan: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_Pan( RageSoundReader *pSource );
+	explicit RageSoundReader_Pan( RageSoundReader *pSource );
 	RageSoundReader_Pan *Copy() const { return new RageSoundReader_Pan(*this); }
 	virtual unsigned GetNumChannels() const;
 	virtual int Read( float *pBuf, int iFrames );

@@ -9,10 +9,10 @@
 class CombinedLifeMeter : public ActorFrame
 {
 public:
-	CombinedLifeMeter() {};
-	virtual ~CombinedLifeMeter() {};
+	CombinedLifeMeter() = default;
+	virtual ~CombinedLifeMeter() = default;
 	
-	virtual void OnLoadSong() {};
+	virtual void OnLoadSong() {}
 	/**
 	 * @brief Change life after receiving a tap note grade.
 	 *

@@ -2716,11 +2716,16 @@ public:
 		p->ApplyGameCommand(SArg(1),pn);
 		COMMON_RETURN_SELF;
 	}
-	static int GetCurrentSong( T* p, lua_State *L )			{ if(p->m_pCurSong) p->m_pCurSong->PushSelf(L); else lua_pushnil(L); return 1; }
+
+	DEFINE_METHOD( GetCurrentSong, m_pCurSong.Get() )
 	static int SetCurrentSong( T* p, lua_State *L )
 	{
-		if( lua_isnil(L,1) ) { p->m_pCurSong.Set(nullptr); }
-		else { Song *pS = Luna<Song>::check( L, 1, true ); p->m_pCurSong.Set( pS ); }
+		if( lua_isnil(L,1) ) {
+			p->m_pCurSong.Set(nullptr);
+		} else {
+			Song *pS = Luna<Song>::check( L, 1, true );
+			p->m_pCurSong.Set( pS );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int CanSafelyEnterGameplay(T* p, lua_State* L)
@@ -2745,9 +2750,7 @@ public:
 	static int GetCurrentSteps( T* p, lua_State *L )
 	{
 		PlayerNumber pn = Enum::Check<PlayerNumber>(L, 1);
-		Steps *pSteps = p->m_pCurSteps[pn];
-		if( pSteps ) { pSteps->PushSelf(L); }
-		else		 { lua_pushnil(L); }
+		LuaHelpers::Push( L, p->m_pCurSteps[pn].Get() );
 		return 1;
 	}
 	static int SetCurrentSteps( T* p, lua_State *L )
@@ -2766,19 +2769,21 @@ public:
 		}
 		COMMON_RETURN_SELF;
 	}
-	static int GetCurrentCourse( T* p, lua_State *L )		{ if(p->m_pCurCourse) p->m_pCurCourse->PushSelf(L); else lua_pushnil(L); return 1; }
+	DEFINE_METHOD( GetCurrentCourse, m_pCurCourse.Get() )
 	static int SetCurrentCourse( T* p, lua_State *L )
 	{
-		if( lua_isnil(L,1) ) { p->m_pCurCourse.Set(nullptr); }
-		else { Course *pC = Luna<Course>::check(L,1); p->m_pCurCourse.Set( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->m_pCurCourse.Set(nullptr);
+		} else {
+			Course *pC = Luna<Course>::check(L,1);
+			p->m_pCurCourse.Set( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int GetCurrentTrail( T* p, lua_State *L )
 	{
 		PlayerNumber pn = Enum::Check<PlayerNumber>(L, 1);
-		Trail *pTrail = p->m_pCurTrail[pn];
-		if( pTrail ) { pTrail->PushSelf(L); }
-		else		 { lua_pushnil(L); }
+		LuaHelpers::Push( L, p->m_pCurTrail[pn].Get() );
 		return 1;
 	}
 	static int SetCurrentTrail( T* p, lua_State *L )
@@ -2797,22 +2802,20 @@ public:
 		}
 		COMMON_RETURN_SELF;
 	}
-	static int GetPreferredSong( T* p, lua_State *L )		{ if(p->m_pPreferredSong) p->m_pPreferredSong->PushSelf(L); else lua_pushnil(L); return 1; }
+	DEFINE_METHOD( GetPreferredSong, m_pPreferredSong )
 	static int SetPreferredSong( T* p, lua_State *L )
 	{
-		if( lua_isnil(L,1) ) { p->m_pPreferredSong = nullptr; }
-		else { Song *pS = Luna<Song>::check(L,1); p->m_pPreferredSong = pS; }
+		if( lua_isnil(L,1) ) {
+			p->m_pPreferredSong = nullptr;
+		} else {
+			Song *pS = Luna<Song>::check(L,1);
+			p->m_pPreferredSong = pS;
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int SetTemporaryEventMode( T* p, lua_State *L )	{ p->m_bTemporaryEventMode = BArg(1); COMMON_RETURN_SELF; }
 	static int Env( T* p, lua_State *L )	{ p->m_Environment->PushSelf(L); return 1; }
-	static int GetEditSourceSteps( T* p, lua_State *L )
-	{
-		Steps *pSteps = p->m_pEditSourceSteps;
-		if( pSteps ) { pSteps->PushSelf(L); }
-		else		 { lua_pushnil(L); }
-		return 1;
-	}
+	DEFINE_METHOD( GetEditSourceSteps, m_pEditSourceSteps.Get() )
 	static int SetPreferredDifficulty( T* p, lua_State *L )
 	{
 		PlayerNumber pn = Enum::Check<PlayerNumber>( L, 1 );

@@ -149,16 +149,16 @@ void ScreenSelectMusic::Init()
 	m_sLoopMusicPath =			THEME->GetPathS(m_sName,"loop music");
 	m_sFallbackCDTitlePath =	THEME->GetPathG(m_sName,"fallback cdtitle");
 
-	m_TexturePreload.Load( m_sFallbackCDTitlePath );
+	m_TexturePreload.Load( RageTextureID{m_sFallbackCDTitlePath} );
 
 	// load banners
 	if (PREFSMAN->m_ImageCache != IMGCACHE_OFF)
 	{
-		m_TexturePreload.Load( Banner::SongBannerTexture(THEME->GetPathG("Banner","all music")) );
-		m_TexturePreload.Load( Banner::SongBannerTexture(THEME->GetPathG("Common","fallback banner")) );
-		m_TexturePreload.Load( Banner::SongBannerTexture(THEME->GetPathG("Banner","roulette")) );
-		m_TexturePreload.Load( Banner::SongBannerTexture(THEME->GetPathG("Banner","random")) );
-		m_TexturePreload.Load( Banner::SongBannerTexture(THEME->GetPathG("Banner","mode")) );
+		m_TexturePreload.Load( Banner::SongBannerTexture(RageTextureID{THEME->GetPathG("Banner","all music")}) );
+		m_TexturePreload.Load( Banner::SongBannerTexture(RageTextureID{THEME->GetPathG("Common","fallback banner")}) );
+		m_TexturePreload.Load( Banner::SongBannerTexture(RageTextureID{THEME->GetPathG("Banner","roulette")}) );
+		m_TexturePreload.Load( Banner::SongBannerTexture(RageTextureID{THEME->GetPathG("Banner","random")}) );
+		m_TexturePreload.Load( Banner::SongBannerTexture(RageTextureID{THEME->GetPathG("Banner","mode")}) );
 	}
 
 	// Load low-res banners and backgrounds if needed.
@@ -189,13 +189,13 @@ void ScreenSelectMusic::Init()
 	this->AddChild( &m_Banner );
 
 	m_sprCDTitleFront.SetName( "CDTitle" );
-	m_sprCDTitleFront.Load( THEME->GetPathG(m_sName,"fallback cdtitle") );
+	m_sprCDTitleFront.Load( RageTextureID{THEME->GetPathG(m_sName,"fallback cdtitle")} );
 	LOAD_ALL_COMMANDS_AND_SET_XY( m_sprCDTitleFront );
 	COMMAND( m_sprCDTitleFront, "Front" );
 	this->AddChild( &m_sprCDTitleFront );
 
 	m_sprCDTitleBack.SetName( "CDTitle" );
-	m_sprCDTitleBack.Load( THEME->GetPathG(m_sName,"fallback cdtitle") );
+	m_sprCDTitleBack.Load( RageTextureID{THEME->GetPathG(m_sName,"fallback cdtitle")} );
 	LOAD_ALL_COMMANDS_AND_SET_XY( m_sprCDTitleBack );
 	COMMAND( m_sprCDTitleBack, "Back" );
 	this->AddChild( &m_sprCDTitleBack );
@@ -313,8 +313,8 @@ void ScreenSelectMusic::CheckBackgroundRequests( bool bForce )
 		if( !sCDTitlePath.empty() )
 		{
 			TEXTUREMAN->DisableOddDimensionWarning();
-			m_sprCDTitleFront.Load( sCDTitlePath );
-			m_sprCDTitleBack.Load( sCDTitlePath );
+			m_sprCDTitleFront.Load( RageTextureID{sCDTitlePath} );
+			m_sprCDTitleBack.Load( RageTextureID{sCDTitlePath} );
 			TEXTUREMAN->EnableOddDimensionWarning();
 		}
 
@@ -336,7 +336,7 @@ void ScreenSelectMusic::CheckBackgroundRequests( bool bForce )
 
 		RString sPath;
 		bool bFreeCache = false;
-		if( TEXTUREMAN->IsTextureRegistered( Sprite::SongBannerTexture(g_sBannerPath) ) )
+		if( TEXTUREMAN->IsTextureRegistered( Sprite::SongBannerTexture(RageTextureID{g_sBannerPath}) ) )
 		{
 			/* If the file is already loaded into a texture, it's finished,
 			 * and we only do this to honor the HighQualTime value. */
@@ -350,7 +350,7 @@ void ScreenSelectMusic::CheckBackgroundRequests( bool bForce )
 		}
 
 		g_bBannerWaiting = false;
-		m_Banner.Load( sPath, true );
+		m_Banner.Load( RageTextureID{sPath}, true );
 
 		if( bFreeCache )
 			m_BackgroundLoader.FinishedWithCachedFile( g_sBannerPath );
@@ -1956,7 +1956,7 @@ void ScreenSelectMusic::AfterMusicChange()
 		{
 			/* If the high-res banner is already loaded, just delay before
 			 * loading it, so the low-res one has time to fade in. */
-			if( !TEXTUREMAN->IsTextureRegistered( Sprite::SongBannerTexture(g_sBannerPath) ) )
+			if( !TEXTUREMAN->IsTextureRegistered( Sprite::SongBannerTexture(RageTextureID{g_sBannerPath}) ) )
 				m_BackgroundLoader.CacheFile( g_sBannerPath );
 
 			g_bBannerWaiting = true;

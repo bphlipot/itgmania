@@ -12,7 +12,7 @@ public:
 class LocalizedString
 {
 public:
-	LocalizedString( const RString& sGroup = "", const RString& sName = "" );
+	explicit LocalizedString( const RString& sGroup = "", const RString& sName = "" );
 	LocalizedString(LocalizedString const& other);
 	~LocalizedString();
 	void Load( const RString& sGroup, const RString& sName );

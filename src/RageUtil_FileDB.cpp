@@ -273,8 +273,8 @@ FileSet *FilenameDB::GetFileSet( const RString &sDir_, bool bCreate )
 		LOG->Warn( "FilenameDB::GetFileSet: m_Mutex was locked" );
 
 	/* Normalize the path. */
-	sDir.Replace("\\", "/"); /* foo\bar -> foo/bar */
-	sDir.Replace("//", "/"); /* foo//bar -> foo/bar */
+	sDir.Replace("\\", "/"); // foo\bar -> foo/bar
+	sDir.Replace("//", "/"); // foo//bar -> foo/bar
 
 	if( sDir == "" )
 		sDir = "/";
@@ -413,7 +413,7 @@ void FilenameDB::AddFile( const RString &sPath_, int iSize, int iHash, void *pPr
 		ASSERT( m_Mutex.IsLockedByThisThread() );
 
 		// const_cast to cast away the constness that is only needed for the name
-		File &f = const_cast<File&>(*fs->files.insert( fn ).first);
+		File &f = const_cast<File&>(*fs->files.insert( File{fn} ).first);
 		f.dir = IsDir;
 		if( !IsDir )
 		{
@@ -471,7 +471,7 @@ void FilenameDB::DelFile( const RString &sPath )
 	SplitPath(sPath, Dir, Name);
 	FileSet *Parent = GetFileSet( Dir, false );
 	if( Parent )
-		Parent->files.erase( Name );
+		Parent->files.erase( File{Name} );
 
 	m_Mutex.Unlock(); /* locked by GetFileSet */
 }

@@ -200,7 +200,7 @@ struct GameInput
 	GameController	controller;
 	GameButton	button;
 
-	bool operator==( const GameInput &other ) const { return controller == other.controller && button == other.button; };
+	bool operator==( const GameInput &other ) const { return controller == other.controller && button == other.button; }
 	bool operator<( const GameInput &other ) const
 	{
 		if( controller < other.controller )
@@ -210,8 +210,8 @@ struct GameInput
 		return button < other.button;
 	}
 
-	inline bool IsValid() const { return controller != GameController_Invalid && button != GameButton_Invalid; };
-	inline void MakeInvalid() { controller = GameController_Invalid; button = GameButton_Invalid; };
+	inline bool IsValid() const { return controller != GameController_Invalid && button != GameButton_Invalid; }
+	inline void MakeInvalid() { controller = GameController_Invalid; button = GameButton_Invalid; }
 
 	RString ToString( const InputScheme* pInputs ) const;
 	bool FromString( const InputScheme* pInputs, const RString &s );

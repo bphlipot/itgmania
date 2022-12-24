@@ -62,7 +62,7 @@ private:
 class RageThreadRegister
 {
 public:
-	RageThreadRegister( const RString &sName );
+	explicit RageThreadRegister( const RString &sName );
 	~RageThreadRegister();
 
 private:
@@ -97,7 +97,7 @@ public:
 	virtual void Unlock();
 	virtual bool IsLockedByThisThread() const;
 
-	RageMutex( const RString &name );
+	explicit RageMutex( const RString &name );
 	virtual ~RageMutex();
 
 protected:
@@ -131,7 +131,7 @@ class LockMutex
 
 public:
 	LockMutex(RageMutex &mut, const char *file, int line);
-	LockMutex(RageMutex &mut): mutex(mut), file(nullptr), line(-1), locked_at(-1), locked(true) { mutex.Lock(); }
+	explicit LockMutex(RageMutex &mut): mutex(mut), file(nullptr), line(-1), locked_at(-1), locked(true) { mutex.Lock(); }
 	~LockMutex();
 	LockMutex(LockMutex &cpy): mutex(cpy.mutex), file(nullptr), line(-1), locked_at(cpy.locked_at), locked(true) { mutex.Lock(); }
 
@@ -151,7 +151,7 @@ class EventImpl;
 class RageEvent: public RageMutex
 {
 public:
-	RageEvent( RString name );
+	explicit RageEvent( RString name );
 	~RageEvent();
 
 	/*
@@ -176,7 +176,7 @@ class SemaImpl;
 class RageSemaphore
 {
 public:
-	RageSemaphore( RString sName, int iInitialValue = 0 );
+	explicit RageSemaphore( RString sName, int iInitialValue = 0 );
 	~RageSemaphore();
 
 	RString GetName() const { return m_sName; }

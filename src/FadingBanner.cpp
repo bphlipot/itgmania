@@ -132,7 +132,7 @@ bool FadingBanner::LoadFromCachedBanner( const RString &path )
 	bool bLowRes = (PREFSMAN->m_ImageCache != IMGCACHE_FULL);
 	if( !bLowRes )
 	{
-		ID = Sprite::SongBannerTexture( path );
+		ID = Sprite::SongBannerTexture( RageTextureID{path} );
 	}
 	else
 	{
@@ -152,7 +152,7 @@ bool FadingBanner::LoadFromCachedBanner( const RString &path )
 			return false;
 
 		if( IsAFile(path) )
-			Load( path );
+			Load( RageTextureID{path} );
 		else
 			LoadFallback();
 
@@ -210,6 +210,12 @@ void FadingBanner::LoadFromCourse( const Course* pCourse )
 		LoadFromCachedBanner( sPath );
 }
 
+void FadingBanner::LoadCardFromCharacter( Character* pCharacter )
+{
+	BeforeChange();
+	m_Banner[m_iIndexLatest].LoadCardFromCharacter( pCharacter );
+}
+
 void FadingBanner::LoadIconFromCharacter( Character* pCharacter )
 {
 	BeforeChange();
@@ -257,7 +263,7 @@ void FadingBanner::LoadCourseFallback()
 void FadingBanner::LoadCustom( RString sBanner )
 {
 	BeforeChange();
-	m_Banner[m_iIndexLatest].Load( THEME->GetPathG( "Banner", sBanner ) );
+	m_Banner[m_iIndexLatest].Load( RageTextureID{THEME->GetPathG( "Banner", sBanner )} );
 	m_Banner[m_iIndexLatest].PlayCommand( sBanner );
 }
 
@@ -272,26 +278,42 @@ public:
 	static int ScaleToClipped( T* p, lua_State *L )			{ p->ScaleToClipped(FArg(1),FArg(2)); COMMON_RETURN_SELF; }
 	static int LoadFromSong( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadFromSong(nullptr); }
-		else { Song *pS = Luna<Song>::check(L,1); p->LoadFromSong( pS ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadFromSong(nullptr);
+		} else {
+			Song *pS = Luna<Song>::check(L,1);
+			p->LoadFromSong( pS );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadFromCourse( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadFromCourse(nullptr); }
-		else { Course *pC = Luna<Course>::check(L,1); p->LoadFromCourse( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadFromCourse(nullptr);
+		} else {
+			Course *pC = Luna<Course>::check(L,1);
+			p->LoadFromCourse( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadIconFromCharacter( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadIconFromCharacter(nullptr); }
-		else { Character *pC = Luna<Character>::check(L,1); p->LoadIconFromCharacter( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadIconFromCharacter(nullptr);
+		} else {
+			Character *pC = Luna<Character>::check(L,1);
+			p->LoadIconFromCharacter( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadCardFromCharacter( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadIconFromCharacter(nullptr); }
-		else { Character *pC = Luna<Character>::check(L,1); p->LoadIconFromCharacter( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadCardFromCharacter(nullptr);
+		} else {
+			Character *pC = Luna<Character>::check(L,1);
+			p->LoadCardFromCharacter( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadFromSongGroup( T* p, lua_State *L )	{ p->LoadFromSongGroup( SArg(1) ); COMMON_RETURN_SELF; }

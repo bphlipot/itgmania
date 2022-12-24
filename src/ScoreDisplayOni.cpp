@@ -13,7 +13,7 @@ ScoreDisplayOni::ScoreDisplayOni()
 {
 	LOG->Trace( "ScoreDisplayOni::ScoreDisplayOni()" );
 
-	m_sprFrame.Load( THEME->GetPathG("ScoreDisplayOni","frame") );
+	m_sprFrame.Load( RageTextureID{THEME->GetPathG("ScoreDisplayOni","frame")} );
 	this->AddChild( &m_sprFrame );
 
 	// init the text

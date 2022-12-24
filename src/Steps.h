@@ -41,7 +41,7 @@ class Steps
 {
 public:
 	/** @brief Set up the Steps with initial values. */
-	Steps( Song* song );
+	explicit Steps( Song* song );
 	/** @brief Destroy the Steps that are no longer needed. */
 	~Steps();
 
@@ -170,7 +170,7 @@ public:
 	 * @brief Retrieves the appropriate timing data for the Steps.  Falls
 	 * back on the Song if needed. */
 	const TimingData *GetTimingData() const;
-	TimingData *GetTimingData() { return const_cast<TimingData*>( static_cast<const Steps*>( this )->GetTimingData() ); };
+	TimingData *GetTimingData() { return const_cast<TimingData*>( static_cast<const Steps*>( this )->GetTimingData() ); }
 
 	/**
 	 * @brief Determine if the Steps have any major timing changes during gameplay.

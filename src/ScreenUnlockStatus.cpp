@@ -56,7 +56,7 @@ void ScreenUnlockStatus::Init()
 		Sprite* pSpr = new Sprite;
 
 		// new unlock graphic
-		pSpr->Load( THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", i)) );
+		pSpr->Load( RageTextureID{THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", i))} );
 
 		// set graphic location
 		pSpr->SetName( ssprintf("Unlock%04d",i) );
@@ -172,7 +172,7 @@ void ScreenUnlockStatus::Init()
 				Sprite* IconCount = new Sprite;
 
 				// new unlock graphic
-				IconCount->Load( THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", i)) );
+				IconCount->Load( RageTextureID{THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", i))} );
 
 				// set graphic location
 				IconCount->SetXY( UNLOCK_TEXT_SCROLL_ICON_X, ScrollingTextStartY);
@@ -257,7 +257,7 @@ void ScreenUnlockStatus::Init()
 
 			// new unlock graphic
 			Sprite* NewIcon = new Sprite;
-			NewIcon->Load( THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", NextIcon)) );
+			NewIcon->Load( RageTextureID{THEME->GetPathG("ScreenUnlockStatus",ssprintf("%04d icon", NextIcon))} );
 			NewIcon->SetXY( UNLOCK_TEXT_SCROLL_ICON_X, ScrollingTextStartY);
 			NewIcon->SetHeight(UNLOCK_TEXT_SCROLL_ICON_SIZE);
 			NewIcon->SetWidth(UNLOCK_TEXT_SCROLL_ICON_SIZE);

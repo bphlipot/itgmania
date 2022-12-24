@@ -41,7 +41,7 @@ class Player: public ActorFrame
 {
 public:
 	// The passed in NoteData isn't touched until Load() is called.
-	Player( NoteData &nd, bool bVisibleParts = true );
+	explicit Player( NoteData &nd, bool bVisibleParts = true );
 	~Player();
 
 	virtual void Update( float fDeltaTime );
@@ -156,8 +156,8 @@ protected:
 	void SetHoldJudgment( TapNote &tn, int iTrack );
 	void SetCombo( unsigned int iCombo, unsigned int iMisses );
 	void IncrementComboOrMissCombo( bool bComboOrMissCombo );
-	void IncrementCombo() { IncrementComboOrMissCombo(true); };
-	void IncrementMissCombo() { IncrementComboOrMissCombo(false); };
+	void IncrementCombo() { IncrementComboOrMissCombo(true); }
+	void IncrementMissCombo() { IncrementComboOrMissCombo(false); }
 
 	void ChangeLife( TapNoteScore tns );
 	void ChangeLife( HoldNoteScore hns, TapNoteScore tns );

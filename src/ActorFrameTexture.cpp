@@ -41,7 +41,7 @@ void ActorFrameTexture::Create()
 		return;
 	}
 
-	if( TEXTUREMAN->IsTextureRegistered( m_sTextureName ) )
+	if( TEXTUREMAN->IsTextureRegistered( RageTextureID{m_sTextureName} ) )
 	{
 		LuaHelpers::ReportScriptError( "ActorFrameTexture: Texture Name already in use." );
 		return;

@@ -18,7 +18,7 @@ public:
 	LuaReference &operator=( const LuaReference &cpy );
 
 	// Convenience constructor.
-	LuaReference(Lua *L)
+	explicit LuaReference(Lua *L)
 		:m_iReference(LUA_NOREF)
 	{
 		SetFromStack(L);

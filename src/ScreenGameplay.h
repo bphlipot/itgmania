@@ -183,7 +183,7 @@ public:
 	float m_fHasteLifeSwitchPoint; // Life amount below which GAMESTATE->m_fHasteRate is based on the life amount.
 
 protected:
-	virtual void UpdateStageStats( MultiPlayer /* mp */ ) {};	// overridden for multiplayer
+	virtual void UpdateStageStats( MultiPlayer /* mp */ ) {}	// overridden for multiplayer
 
 	virtual bool UseSongBackgroundAndForeground() const { return true; }
 

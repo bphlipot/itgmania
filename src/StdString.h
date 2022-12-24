@@ -92,6 +92,7 @@ typedef char*			PSTR;
 // Standard headers needed
 #include <string>			// basic_string
 #include <algorithm>			// for_each, etc.
+#include <type_traits>
 
 #if defined(WIN32)
 #include <malloc.h>			// _alloca
@@ -391,7 +392,7 @@ public:
 	{
 	}
 
-	CStdStr(const MYTYPE& str) : MYBASE(str)
+	explicit CStdStr(const MYTYPE& str) : MYBASE(str)
 	{
 	}
 
@@ -587,41 +588,18 @@ public:
 
 	// Array-indexing operators.  Required because we defined an implicit cast
 	// to operator const CT* (Thanks to Julian Selman for pointing this out)
-	CT& operator[](int nIdx)
+	template<typename T, typename std::enable_if<std::is_integral<T>::value, T>::type* = nullptr>
+	CT& operator[](T nIdx)
 	{
 		return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
 	}
 
-	const CT& operator[](int nIdx) const
+	template<typename T, typename std::enable_if<std::is_integral<T>::value, T>::type* = nullptr>
+	const CT& operator[](T nIdx) const
 	{
 		return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
 	}
 
-	CT& operator[](unsigned int nIdx)
-	{
-		return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
-
-	const CT& operator[](unsigned int nIdx) const
-	{
-		return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
-
-	CT& operator[](long unsigned int nIdx){
-	  return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
-       
-	const CT& operator[](long unsigned int nIdx) const {
-	  return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
-	
-	CT& operator[](long long unsigned int nIdx){
-	  return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
-	
-	const CT& operator[](long long unsigned int nIdx) const {
-	  return MYBASE::operator[](static_cast<MYSIZE>(nIdx));
-	}
 #ifndef SS_NO_IMPLICIT_CASTS
 	operator const CT*() const
 	{

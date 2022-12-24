@@ -48,16 +48,26 @@ inline U lerp( T x, U l, U h )
 template<typename T, typename U, typename V>
 inline bool CLAMP(T& x, U l, V h)
 {
-	if(x > static_cast<T>(h)) { x= static_cast<T>(h); return true; }
-	else if(x < static_cast<T>(l)) { x= static_cast<T>(l); return true; }
+	if(x > static_cast<T>(h)) {
+		x= static_cast<T>(h);
+		return true;
+	} else if(x < static_cast<T>(l)) {
+		x= static_cast<T>(l);
+		return true;
+	}
 	return false;
 }
 
 template<class T>
 inline bool ENUM_CLAMP( T &x, T l, T h )
 {
-	if (x > h)	{ x = h; return true; }
-	else if (x < l) { x = l; return true; }
+	if (x > h) {
+		x = h;
+		return true;
+	} else if (x < l) {
+		x = l;
+		return true;
+	}
 	return false;
 }
 
@@ -242,7 +252,7 @@ inline uint16_t Swap16BE( uint16_t n ) { return Endian::big    ? n : Swap16( n )
 class MersenneTwister : public std::mt19937
 {
 public:
-	MersenneTwister( int iSeed = 0 ) : std::mt19937( iSeed == 0 ? time( nullptr ) : iSeed ) {}
+	explicit MersenneTwister( int iSeed = 0 ) : std::mt19937( iSeed == 0 ? time( nullptr ) : iSeed ) {}
 };
 
 typedef MersenneTwister RandomGen;
@@ -407,8 +417,6 @@ inline bool operator>>(const RString& lhs, T& rhs)
 // Exception-safe wrappers around stoi and friends
 // Additional argument exceptVal will be returned if the conversion couldn't be performed
 int StringToInt( const std::string& str, std::size_t* pos = 0, int base = 10, int exceptVal = 0 );
-long StringToLong( const std::string& str, std::size_t* pos = 0, int base = 10, long exceptVal = 0 );
-long long StringToLLong( const std::string& str, std::size_t* pos = 0, int base = 10, long long exceptVal = 0 );
 
 RString WStringToRString( const std::wstring &sString );
 RString WcharToUTF8( wchar_t c );
@@ -523,7 +531,7 @@ bool GetFileContents( const RString &sFile, std::vector<RString> &asOut );
 class Regex
 {
 public:
-	Regex( const RString &sPat = "" );
+	explicit Regex( const RString &sPat = "" );
 	Regex( const Regex &rhs );
 	Regex &operator=( const Regex &rhs );
 	~Regex();

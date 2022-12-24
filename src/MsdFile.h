@@ -21,7 +21,7 @@ public:
 		 * @param i the index.
 		 * @return the proper parameter.
 		 */
-		RString operator[]( unsigned i ) const { if( i >= params.size() ) return RString(); return params[i]; }
+		RString operator[]( unsigned i ) const { return i >= params.size() ? RString{} : params[i]; }
 	};
 	
 	MsdFile(): values(), error("") {}
@@ -58,7 +58,7 @@ public:
 	 * @param val the current value index.
 	 * @return the number of params.
 	 */
-	unsigned GetNumParams( unsigned val ) const { if( val >= GetNumValues() ) return 0; return values[val].params.size(); }
+	unsigned GetNumParams( unsigned val ) const { return val >= GetNumValues() ? 0 : values[val].params.size(); }
 	/**
 	 * @brief Get the specified value.
 	 * @param val the current value index.

@@ -2,7 +2,6 @@
 
 #include "RageDisplay_OGL.h"
 #include "RageDisplay_OGL_Helpers.h"
-using namespace RageDisplay_Legacy_Helpers;
 
 #include "RageFile.h"
 #include "RageSurface.h"
@@ -461,7 +460,7 @@ void InitShaders()
 			}
 			else
 			{
-				ASSERT_M( iError == GL_NO_ERROR, GLToString(iError) );
+				ASSERT_M( iError == GL_NO_ERROR, RageDisplay_Legacy_Helpers::GLToString(iError) );
 			}
 		}
 	}
@@ -596,7 +595,7 @@ static void CheckPalettedTextures()
 { \
 	GLenum glError = glGetError(); \
 	if (glError != GL_NO_ERROR) { \
-		sError = ssprintf(f " failed (%s)", GLToString(glError).c_str() ); \
+		sError = ssprintf(f " failed (%s)", RageDisplay_Legacy_Helpers::GLToString(glError).c_str() ); \
 		break; \
 	} \
 }
@@ -613,7 +612,8 @@ static void CheckPalettedTextures()
 		if (iFormat != glTexFormat)
 		{
 			sError = ssprintf( "Expected format %s, got %s instead",
-					GLToString(glTexFormat).c_str(), GLToString(iFormat).c_str() );
+					RageDisplay_Legacy_Helpers::GLToString(glTexFormat).c_str(),
+					RageDisplay_Legacy_Helpers::GLToString(iFormat).c_str() );
 			break;
 		}
 
@@ -645,7 +645,8 @@ static void CheckPalettedTextures()
 		GL_CHECK_ERROR( "glGetColorTableParameterivEXT(GL_COLOR_TABLE_FORMAT)" );
 		if (iRealFormat != GL_RGBA8)
 		{
-			sError = ssprintf( "GL_COLOR_TABLE_FORMAT returned %s instead of GL_RGBA8", GLToString(iRealFormat).c_str() );
+			sError = ssprintf( "GL_COLOR_TABLE_FORMAT returned %s instead of GL_RGBA8",
+				RageDisplay_Legacy_Helpers::GLToString(iRealFormat).c_str() );
 			break;
 		}
 	} while(0);
@@ -679,7 +680,7 @@ static void CheckReversePackedPixels()
 	{
 		g_bReversePackedPixelsWorks = false;
 		LOG->Info( "GL_UNSIGNED_SHORT_1_5_5_5_REV failed (%s), disabled",
-			GLToString(glError).c_str() );
+			RageDisplay_Legacy_Helpers::GLToString(glError).c_str() );
 	}
 }
 
@@ -2232,7 +2233,8 @@ uintptr_t RageDisplay_Legacy::CreateTexture(
 			break;
 		// OpenGL 1.2 types
 		default:
-			LOG->Trace( "Can't generate mipmaps for type %s because GLU version %.1f is too old.", GLToString(glImageType).c_str(), g_gluVersion/10.f );
+			LOG->Trace( "Can't generate mipmaps for type %s because GLU version %.1f is too old.",
+				RageDisplay_Legacy_Helpers::GLToString(glImageType).c_str(), g_gluVersion/10.f );
 			bGenerateMipMaps = false;
 			break;
 		}
@@ -2286,10 +2288,10 @@ uintptr_t RageDisplay_Legacy::CreateTexture(
 
 	LOG->Trace( "%s (format %s, %ix%i, format %s, type %s, pixfmt %i, imgpixfmt %i)",
 		bGenerateMipMaps? "gluBuild2DMipmaps":"glTexImage2D",
-		GLToString(glTexFormat).c_str(),
+		RageDisplay_Legacy_Helpers::GLToString(glTexFormat).c_str(),
 		pImg->w, pImg->h,
-		GLToString(glImageFormat).c_str(),
-		GLToString(glImageType).c_str(), pixfmt, SurfacePixFmt );
+		RageDisplay_Legacy_Helpers::GLToString(glImageFormat).c_str(),
+		RageDisplay_Legacy_Helpers::GLToString(glImageType).c_str(), pixfmt, SurfacePixFmt );
 
 	DebugFlushGLErrors();
 

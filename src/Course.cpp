@@ -394,7 +394,7 @@ namespace
 	struct SongIsEqual
 	{
 		const Song *m_pSong;
-		SongIsEqual( const Song *pSong ) : m_pSong(pSong) { }
+		explicit SongIsEqual( const Song *pSong ) : m_pSong(pSong) { }
 		bool operator()( const SongAndSteps &sas ) const { return sas.pSong == m_pSong; }
 	};
 }
@@ -587,9 +587,9 @@ bool Course::GetTrailUnsorted( StepsType st, CourseDifficulty cd, Trail &trail )
 					iMaxDist = std::max( std::min( iMaxDist, MAX_BOTTOM_RANGE - iHighMeter ), iMinDist );
 
 					int iAdd;
-					if( iMaxDist == iMinDist )
+					if( iMaxDist == iMinDist ) {
 						iAdd = iMaxDist;
-					else {
+					} else {
 						std::uniform_int_distribution<> dist( iMinDist, iMaxDist );
 						iAdd = dist( rnd );
 					}
@@ -820,9 +820,9 @@ void Course::GetTrailUnsortedEndless( const std::vector<CourseEntry> &entries, T
 				iMaxDist = std::max( std::min( iMaxDist, MAX_BOTTOM_RANGE - iHighMeter ), iMinDist );
 
 				int iAdd;
-				if( iMaxDist == iMinDist )
+				if( iMaxDist == iMinDist ) {
 					iAdd = iMaxDist;
-				else {
+				} else {
 					std::uniform_int_distribution<> dist( iMinDist, iMaxDist );
 					iAdd = dist( rnd );
 				}
@@ -1304,9 +1304,23 @@ public:
 		LuaHelpers::CreateTableFromArray<Trail*>( v, L );
 		return 1;
 	}
-	static int GetBannerPath( T* p, lua_State *L )		{ RString s = p->GetBannerPath(); if( s.empty() ) return 0; LuaHelpers::Push(L, s); return 1; }
-	static int GetBackgroundPath( T* p, lua_State *L )		{ RString s = p->GetBackgroundPath(); if( s.empty() ) return 0; LuaHelpers::Push(L, s); return 1; }
-	static int GetCourseDir( T* p, lua_State *L )			{ lua_pushstring(L, p->m_sPath ); return 1; }
+	static int GetBannerPath( T* p, lua_State *L )		{
+		RString s = p->GetBannerPath();
+		if( s.empty() ) {
+			return 0;
+		}
+		LuaHelpers::Push(L, s);
+		return 1;
+	}
+	static int GetBackgroundPath( T* p, lua_State *L )	{
+		RString s = p->GetBackgroundPath();
+		if( s.empty() ) {
+			return 0;
+		}
+		LuaHelpers::Push(L, s);
+		return 1;
+	}
+	static int GetCourseDir( T* p, lua_State *L )		{ lua_pushstring(L, p->m_sPath ); return 1; }
 	static int GetGroupName( T* p, lua_State *L )		{ lua_pushstring(L, p->m_sGroupName ); return 1; }
 	static int IsAutogen( T* p, lua_State *L )		{ lua_pushboolean(L, p->m_bIsAutogen ); return 1; }
 	static int GetEstimatedNumStages( T* p, lua_State *L )	{ lua_pushnumber(L, p->GetEstimatedNumStages() ); return 1; }

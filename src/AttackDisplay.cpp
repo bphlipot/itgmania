@@ -61,7 +61,7 @@ void AttackDisplay::Init( const PlayerState* pPlayerState )
 			continue;
 		}
 
-		m_TexturePreload.Load( path );
+		m_TexturePreload.Load( RageTextureID{path} );
 	}
 }
 
@@ -103,7 +103,7 @@ void AttackDisplay::SetAttack( const RString &sText )
 		return;
 
 	m_sprAttack.SetDiffuseAlpha( 1 );
-	m_sprAttack.Load( path );
+	m_sprAttack.Load( RageTextureID{path} );
 
 	// TODO: Remove use of PlayerNumber.
 	PlayerNumber pn = m_pPlayerState->m_PlayerNumber;

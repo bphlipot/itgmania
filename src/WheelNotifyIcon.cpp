@@ -3,7 +3,6 @@
 #include "RageUtil.h"
 #include "GameConstantsAndTypes.h"
 #include "MusicWheel.h"
-#include "WheelNotifyIcon.h"
 #include "RageTimer.h"
 #include "ThemeManager.h"
 
@@ -19,7 +18,7 @@ static ThemeMetric<int>		NUM_ICONS_TO_SHOW ("WheelNotifyIcon","NumIconsToShow");
 WheelNotifyIcon::WheelNotifyIcon()
 {
 	// Load( THEME->GetPathG("MusicWheelItem","WheelNotifyIcon") );
-	Load( THEME->GetPathG("WheelNotifyIcon","icons 4x2") );
+	Load( RageTextureID{THEME->GetPathG("WheelNotifyIcon","icons 4x2")} );
 	StopAnimating();
 }
 

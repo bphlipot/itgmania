@@ -1,10 +1,6 @@
 #ifndef ARCH_SETUP_UNIX_H
 #define ARCH_SETUP_UNIX_H
 
-#if !defined(_STDC_C99) && !defined(__C99FEATURES__)
-#define __C99FEATURES__
-#endif
-
 #ifdef HAVE_ALLOCA_H
 #include <alloca.h>
 #endif

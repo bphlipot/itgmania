@@ -192,7 +192,7 @@ void Character::DemandGraphics()
 	{
 		RString s = GetIconPath();
 		if( !s.empty() )
-			m_Preload.Load( s );
+			m_Preload.Load( RageTextureID{s} );
 	}
 }
 

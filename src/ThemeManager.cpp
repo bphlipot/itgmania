@@ -569,7 +569,7 @@ RString ThemeManager::GetThemeDirFromName( const RString &sThemeName )
 struct CompareLanguageTag
 {
 	RString m_sLanguageString;
-	CompareLanguageTag( const RString &sLang )
+	explicit CompareLanguageTag( const RString &sLang )
 	{
 		m_sLanguageString = RString("(lang ") + sLang + ")";
 		LOG->Trace( "try \"%s\"", sLang.c_str() );

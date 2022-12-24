@@ -3,6 +3,7 @@
 #ifndef RAGE_SOUND_READER_THREADED_BUFFER
 #define RAGE_SOUND_READER_THREADED_BUFFER
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 #include "RageUtil_CircularBuffer.h"
 #include "RageThreads.h"
@@ -12,7 +13,7 @@ class RageThread;
 class RageSoundReader_ThreadedBuffer: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_ThreadedBuffer( RageSoundReader *pSource );
+	explicit RageSoundReader_ThreadedBuffer( RageSoundReader *pSource );
 	RageSoundReader_ThreadedBuffer( const RageSoundReader_ThreadedBuffer &cpy );
 	~RageSoundReader_ThreadedBuffer();
 	RageSoundReader_ThreadedBuffer *Copy() const { return new RageSoundReader_ThreadedBuffer(*this); }

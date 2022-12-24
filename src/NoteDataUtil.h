@@ -102,8 +102,7 @@ namespace NoteDataUtil
 		left, /**< The NoteData is arranged as if the player was facing to the left. */
 		right, /**< The NoteData is arranged as if the player was facing to the right. */
 		mirror, /**< The NoteData is arranged as if facing a straight mirror. */
-		backwards, /**< The NoteData is arranged as if the player was facing backwards.
-					This is NOT always the same as mirror. */
+		backwards, /**< The NoteData is arranged as if the player was facing backwards. This is NOT always the same as mirror. */
 		shuffle,
 		soft_shuffle,
 		super_shuffle,

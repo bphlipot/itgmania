@@ -3,6 +3,7 @@
 #ifndef RAGE_SOUND_READER_PITCH_CHANGE_H
 #define RAGE_SOUND_READER_PITCH_CHANGE_H
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 class RageSoundReader_SpeedChange;
 class RageSoundReader_Resample_Good;
@@ -10,7 +11,7 @@ class RageSoundReader_Resample_Good;
 class RageSoundReader_PitchChange: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_PitchChange( RageSoundReader *pSource );
+	explicit RageSoundReader_PitchChange( RageSoundReader *pSource );
 	RageSoundReader_PitchChange( const RageSoundReader_PitchChange &cpy );
 
 	virtual int Read( float *pBuf, int iFrames );

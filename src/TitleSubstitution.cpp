@@ -52,9 +52,9 @@ void TitleTrans::LoadFromNode( const XNode* pNode )
 		const RString &sKeyName = attr->first;
 		const RString sValue = attr->second->GetValue<RString>();
 		if( sKeyName == "DontTransliterate" )		translit = false;
-		else if( sKeyName == "TitleFrom" )		TitleFrom			= "^(" + sValue + ")$";
-		else if( sKeyName == "ArtistFrom" )		ArtistFrom			= "^(" + sValue + ")$";
-		else if( sKeyName == "SubtitleFrom")		SubFrom				= "^(" + sValue + ")$";
+		else if( sKeyName == "TitleFrom" )		TitleFrom			= Regex{"^(" + sValue + ")$"};
+		else if( sKeyName == "ArtistFrom" )		ArtistFrom			= Regex{"^(" + sValue + ")$"};
+		else if( sKeyName == "SubtitleFrom")		SubFrom				= Regex{"^(" + sValue + ")$"};
 		else if( sKeyName == "TitleTo")			Replacement.Title		= sValue;
 		else if( sKeyName == "ArtistTo")		Replacement.Artist		= sValue;
 		else if( sKeyName == "SubtitleTo")		Replacement.Subtitle		= sValue;

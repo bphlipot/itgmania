@@ -702,8 +702,9 @@ RString FontPageSettings::MapRange( RString sMapping, int iMapOffset, int iGlyph
 		return "Map overflow"; // there aren't enough characters in the map
 
 	// If iCount is -1, set it to the number of characters in the map.
-	if( iCount == -1 )
+	if( iCount == -1 ) {
 		for( iCount = 0; pMapping[iCount] != 0; ++iCount ) ;
+	}
 
 	while( *pMapping != 0 )
 	{

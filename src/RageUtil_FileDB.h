@@ -34,7 +34,7 @@ struct File
 	const FileSet *dirp;
 
 	File() { dir=false; dirp=nullptr; size=-1; hash=-1; priv=nullptr;}
-	File( const RString &fn )
+	explicit File( const RString &fn )
 	{
 		SetName( fn );
 		dir=false; size=-1; hash=-1; priv=nullptr; dirp=nullptr;

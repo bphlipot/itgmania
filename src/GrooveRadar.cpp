@@ -43,7 +43,7 @@ GrooveRadar::GrooveRadar()
 	for( int c=0; c<NUM_SHOWN_RADAR_CATEGORIES; c++ )
 	{
 		m_sprRadarLabels[c].SetName( ssprintf("Label%i",c+1) );
-		m_sprRadarLabels[c].Load( THEME->GetPathG("GrooveRadar","labels 1x5") );
+		m_sprRadarLabels[c].Load( RageTextureID{THEME->GetPathG("GrooveRadar","labels 1x5")} );
 		m_sprRadarLabels[c].StopAnimating();
 		m_sprRadarLabels[c].SetState( c );
 		ActorUtil::LoadAllCommandsAndSetXY( m_sprRadarLabels[c], "GrooveRadar" );

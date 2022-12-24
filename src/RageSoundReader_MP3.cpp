@@ -1,4 +1,4 @@
-/* MAD is available from: http://www.underbit.com/products/mad/ */
+// MAD is available from: http://www.underbit.com/products/mad/
 
 #include "global.h"
 #include "RageSoundReader_MP3.h"
@@ -37,9 +37,9 @@ static tagtype tagtype( const unsigned char *data, id3_length_t length )
 	return TAGTYPE_NONE;
 }
 
-static unsigned long id3_parse_uint( const unsigned char **ptr, unsigned int bytes )
+static uint32_t id3_parse_uint( const unsigned char **ptr, unsigned int bytes )
 {
-	unsigned long value = 0;
+	uint32_t value = 0;
 
 	ASSERT(bytes >= 1 && bytes <= 4);
 
@@ -54,9 +54,9 @@ static unsigned long id3_parse_uint( const unsigned char **ptr, unsigned int byt
 	return value;
 }
 
-static unsigned long id3_parse_syncsafe( const unsigned char **ptr, unsigned int bytes )
+static uint32_t id3_parse_syncsafe( const unsigned char **ptr, unsigned int bytes )
 {
-	unsigned long value = 0;
+	uint32_t value = 0;
 
 	ASSERT(bytes == 4 || bytes == 5);
 
@@ -89,7 +89,7 @@ static void parse_header(const unsigned char **ptr,
  * NAME:	tag->query()
  * DESCRIPTION:	if a tag begins at the given location, return its size
  */
-signed long id3_tag_query( const unsigned char *data, id3_length_t length )
+int32_t id3_tag_query( const unsigned char *data, id3_length_t length )
 {
 	unsigned int version;
 	int flags;
@@ -129,11 +129,11 @@ signed long id3_tag_query( const unsigned char *data, id3_length_t length )
  */
 struct xing
 {
-	long flags;					/* valid fields (see below) */
-	unsigned long frames;		/* total number of frames */
-	unsigned long bytes;		/* total number of bytes */
+	int32_t flags;					/* valid fields (see below) */
+	uint32_t frames;		/* total number of frames */
+	uint32_t bytes;		/* total number of bytes */
 	unsigned char toc[100];		/* 100-point seek table */
-	long scale;					/* ?? */
+	int32_t scale;					/* ?? */
 	enum { XING, INFO } type;
 };
 

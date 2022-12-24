@@ -99,7 +99,7 @@ bool BeginnerHelper::Init( int iDancePadType )
 		this->AddChild( m_sBackground );
 		//m_sBackground.SetXY( 1, 1 );
 
-		m_sFlash.Load( THEME->GetPathG("BeginnerHelper","flash") );
+		m_sFlash.Load( RageTextureID{THEME->GetPathG("BeginnerHelper","flash")} );
 		m_sFlash.SetXY( 0, 0 );
 		m_sFlash.SetDiffuseAlpha( 0 );
 	}
@@ -109,7 +109,7 @@ bool BeginnerHelper::Init( int iDancePadType )
 	{
 		for( int lsce=0; lsce<4; lsce++ )
 		{
-			m_sStepCircle[lsc][lsce].Load( THEME->GetPathG("BeginnerHelper","stepcircle") );
+			m_sStepCircle[lsc][lsce].Load( RageTextureID{THEME->GetPathG("BeginnerHelper","stepcircle")} );
 			m_sStepCircle[lsc][lsce].SetZoom( 0 );	// Hide until needed.
 			this->AddChild(&m_sStepCircle[lsc][lsce]);
 

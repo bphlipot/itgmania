@@ -49,7 +49,7 @@ void StreamDisplay::Load( const RString & /* unreferenced: _sMetricsGroup  */)
 		{
 			Sprite *pSpr = new Sprite;
 
-			pSpr->Load( THEME->GetPathG( sMetricsGroup, StreamTypeToString(st) ) );
+			pSpr->Load( RageTextureID{THEME->GetPathG( sMetricsGroup, StreamTypeToString(st) )} );
 			m_vpSprPill[st].push_back( pSpr );
 
 			m_transformPill.TransformItemDirect( *pSpr, -1, i, iNumPills );

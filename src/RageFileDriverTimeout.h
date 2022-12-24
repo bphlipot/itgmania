@@ -10,7 +10,7 @@ class ThreadedFileWorker;
 class RageFileDriverTimeout: public RageFileDriver
 {
 public:
-	RageFileDriverTimeout( const RString &path );
+	explicit RageFileDriverTimeout( const RString &path );
 	virtual ~RageFileDriverTimeout();
 
 	RageFileBasic *Open( const RString &path, int mode, int &err );

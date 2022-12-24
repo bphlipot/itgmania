@@ -259,7 +259,12 @@ private:
 public:
 	explicit BroadcastOnChangePtr( MessageID m ) { mSendWhenChanged = m; val = nullptr; }
 	T* Get() const { return val; }
-	void Set( T* t ) { val = t; if(MESSAGEMAN) MESSAGEMAN->Broadcast( MessageIDToString(mSendWhenChanged) ); }
+	void Set( T* t ) {
+		val = t;
+		if(MESSAGEMAN) {
+			MESSAGEMAN->Broadcast( MessageIDToString(mSendWhenChanged) );
+		}
+	}
 	/* This is only intended to be used for setting temporary values; always
 	 * restore the original value when finished, so listeners don't get confused
 	 * due to missing a message. */

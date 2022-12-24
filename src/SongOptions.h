@@ -53,7 +53,7 @@ public:
 		m_SpeedfHaste(1.0f), m_AutosyncType(AutosyncType_Off),
 		m_SoundEffectType(SoundEffectType_Off),
 		m_bStaticBackground(false), m_bRandomBGOnly(false),
-		m_bSaveScore(true), m_bSaveReplay(false) {};
+		m_bSaveScore(true), m_bSaveReplay(false) {}
 	void Init() { *this = {}; }
 	void Approach( const SongOptions& other, float fDeltaSeconds );
 	void GetMods( std::vector<RString> &AddTo ) const;

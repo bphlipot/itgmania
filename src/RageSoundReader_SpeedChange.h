@@ -3,12 +3,13 @@
 #ifndef RAGE_SOUND_READER_SPEED_CHANGE_H
 #define RAGE_SOUND_READER_SPEED_CHANGE_H
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 
 class RageSoundReader_SpeedChange: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_SpeedChange( RageSoundReader *pSource );
+	explicit RageSoundReader_SpeedChange( RageSoundReader *pSource );
 
 	virtual int SetPosition( int iFrame );
 	virtual int Read( float *pBuf, int iFrames );

@@ -59,7 +59,7 @@ NoteField::NoteField()
 	m_fYPosCurrentBeatLastUpdate = -1;
 	this->SubscribeToMessage( Message_CurrentSongChanged );
 
-	m_sprBeatBars.Load( THEME->GetPathG("NoteField","bars") );
+	m_sprBeatBars.Load( RageTextureID{THEME->GetPathG("NoteField","bars")} );
 	m_sprBeatBars.StopAnimating();
 
 	// I decided to do it this way because I don't want to dig through

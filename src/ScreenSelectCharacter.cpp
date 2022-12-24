@@ -87,7 +87,7 @@ void ScreenSelectCharacter::Init()
 
 	FOREACH_EnabledPlayer( p )
 	{
-		m_sprTitle[p].Load( THEME->GetPathG("ScreenSelectCharacter","title 2x2") );
+		m_sprTitle[p].Load( RageTextureID{THEME->GetPathG("ScreenSelectCharacter","title 2x2")} );
 		m_sprTitle[p].SetState( GAMESTATE->IsHumanPlayer(p) ? p : 2+p );
 		m_sprTitle[p].StopAnimating();
 		m_sprTitle[p].RunCommands( TITLE_ON_COMMAND(p) );
@@ -97,7 +97,7 @@ void ScreenSelectCharacter::Init()
 		m_sprCard[p].RunCommands( CARD_ON_COMMAND(p) );
 		this->AddChild( &m_sprCard[p] );
 
-		m_sprCardArrows[p].Load( THEME->GetPathG("ScreenSelectCharacter","card arrows") );
+		m_sprCardArrows[p].Load( RageTextureID{THEME->GetPathG("ScreenSelectCharacter","card arrows")} );
 		m_sprCardArrows[p].RunCommands( CARD_ARROWS_ON_COMMAND(p) );
 		this->AddChild( &m_sprCardArrows[p] );
 
@@ -109,7 +109,7 @@ void ScreenSelectCharacter::Init()
 
 		if(GAMESTATE->m_PlayMode == PLAY_MODE_BATTLE || GAMESTATE->m_PlayMode == PLAY_MODE_RAVE)
 		{
-			m_sprAttackFrame[p].Load( THEME->GetPathG("ScreenSelectCharacter","attack frame 1x2") );
+			m_sprAttackFrame[p].Load( RageTextureID{THEME->GetPathG("ScreenSelectCharacter","attack frame 1x2")} );
 			m_sprAttackFrame[p].StopAnimating();
 			m_sprAttackFrame[p].SetState( p );
 			m_sprAttackFrame[p].RunCommands( ATTACK_FRAME_ON_COMMAND(p) );
@@ -127,7 +127,7 @@ void ScreenSelectCharacter::Init()
 		}
 	}
 
-	m_sprExplanation.Load( THEME->GetPathG("ScreenSelectCharacter","explanation") );
+	m_sprExplanation.Load( RageTextureID{THEME->GetPathG("ScreenSelectCharacter","explanation")} );
 	m_sprExplanation.RunCommands( EXPLANATION_ON_COMMAND );
 	this->AddChild( &m_sprExplanation );
 
@@ -238,7 +238,7 @@ void ScreenSelectCharacter::AfterValueChange( PlayerNumber pn )
 			CHARMAN->GetCharacters( apCharacters );
 			Character* pChar = apCharacters[ m_iSelectedCharacter[pnAffected] ];
 			m_sprCard[pnAffected].UnloadTexture();
-			m_sprCard[pnAffected].Load( pChar->GetCardPath() );
+			m_sprCard[pnAffected].Load( RageTextureID{pChar->GetCardPath()} );
 
 			if(GAMESTATE->m_PlayMode == PLAY_MODE_BATTLE || GAMESTATE->m_PlayMode == PLAY_MODE_RAVE)
 				for( int i=0; i<NUM_ATTACK_LEVELS; i++ )

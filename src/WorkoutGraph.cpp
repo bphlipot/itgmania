@@ -31,7 +31,7 @@ WorkoutGraph::~WorkoutGraph()
 
 void WorkoutGraph::Load()
 {
-	m_sprEmpty.Load( THEME->GetPathG("WorkoutGraph","empty") );
+	m_sprEmpty.Load( RageTextureID{THEME->GetPathG("WorkoutGraph","empty")} );
 	this->AddChild( &m_sprEmpty );
 }
 
@@ -90,7 +90,7 @@ void WorkoutGraph::SetInternal( int iMinSongsPlayed )
 	{
 		float fOffsetFromCenter = (index++) - (iBlocksWide-1)/2.0f;
 		Sprite *p = new Sprite;
-		p->Load( THEME->GetPathG("WorkoutGraph","bar") );
+		p->Load( RageTextureID{THEME->GetPathG("WorkoutGraph","bar")} );
 		p->SetVertAlign( align_bottom );
 		p->ZoomToWidth( fBlockSize );
 		int iMetersToCover = (MAX_METER - meter);

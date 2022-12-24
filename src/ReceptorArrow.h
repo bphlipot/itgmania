@@ -17,7 +17,7 @@ public:
 	virtual void DrawPrimitives();
 	virtual void Update( float fDeltaTime );
 	void Step( TapNoteScore score );
-	void SetPressed() { m_bIsPressed = true; };
+	void SetPressed() { m_bIsPressed = true; }
 	void SetNoteUpcoming( bool b );
 private:
 

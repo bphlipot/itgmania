@@ -272,7 +272,7 @@ public:
 	 * @brief Draw the primitives of the Actor.
 	 *
 	 * Derivative classes should override this function. */
-	virtual void DrawPrimitives() {};
+	virtual void DrawPrimitives() {}
 	/** @brief Pop the transform from the world matrix stack. */
 	virtual void EndDraw();
 	
@@ -322,22 +322,22 @@ public:
 	/**
 	 * @brief Retrieve the Actor's x position.
 	 * @return the Actor's x position. */
-	float GetX() const				{ return m_current.pos.x; };
+	float GetX() const				{ return m_current.pos.x; }
 	/**
 	 * @brief Retrieve the Actor's y position.
 	 * @return the Actor's y position. */
-	float GetY() const				{ return m_current.pos.y; };
+	float GetY() const				{ return m_current.pos.y; }
 	/**
 	 * @brief Retrieve the Actor's z position.
 	 * @return the Actor's z position. */
-	float GetZ() const				{ return m_current.pos.z; };
-	float GetDestX() const				{ return DestTweenState().pos.x; };
-	float GetDestY() const				{ return DestTweenState().pos.y; };
-	float GetDestZ() const				{ return DestTweenState().pos.z; };
-	void  SetX( float x )				{ DestTweenState().pos.x = x; };
-	void  SetY( float y )				{ DestTweenState().pos.y = y; };
-	void  SetZ( float z )				{ DestTweenState().pos.z = z; };
-	void  SetXY( float x, float y )			{ DestTweenState().pos.x = x; DestTweenState().pos.y = y; };
+	float GetZ() const				{ return m_current.pos.z; }
+	float GetDestX() const				{ return DestTweenState().pos.x; }
+	float GetDestY() const				{ return DestTweenState().pos.y; }
+	float GetDestZ() const				{ return DestTweenState().pos.z; }
+	void  SetX( float x )				{ DestTweenState().pos.x = x; }
+	void  SetY( float y )				{ DestTweenState().pos.y = y; }
+	void  SetZ( float z )				{ DestTweenState().pos.z = z; }
+	void  SetXY( float x, float y )			{ DestTweenState().pos.x = x; DestTweenState().pos.y = y; }
 	/**
 	 * @brief Add to the x position of this Actor.
 	 * @param x the amount to add to the Actor's x position. */
@@ -425,9 +425,9 @@ public:
 	void  SetRotationY( float rot )		{ DestTweenState().rotation.y = rot; }
 	void  SetRotationZ( float rot )		{ DestTweenState().rotation.z = rot; }
 	// added in StepNXA, now available in sm-ssc:
-	void  AddRotationX( float rot )		{ DestTweenState().rotation.x += rot; };
-	void  AddRotationY( float rot )		{ DestTweenState().rotation.y += rot; };
-	void  AddRotationZ( float rot )		{ DestTweenState().rotation.z += rot; };
+	void  AddRotationX( float rot )		{ DestTweenState().rotation.x += rot; }
+	void  AddRotationY( float rot )		{ DestTweenState().rotation.y += rot; }
+	void  AddRotationZ( float rot )		{ DestTweenState().rotation.z += rot; }
 	// and these were normally in SM:
 	void  AddRotationH( float rot );
 	void  AddRotationP( float rot );
@@ -454,24 +454,24 @@ public:
 
 	void SetGlobalDiffuseColor( RageColor c );
 
-	virtual void SetDiffuse( RageColor c )		{ for(int i=0; i<NUM_DIFFUSE_COLORS; i++) DestTweenState().diffuse[i] = c; };
+	virtual void SetDiffuse( RageColor c )		{ for(int i=0; i<NUM_DIFFUSE_COLORS; i++) DestTweenState().diffuse[i] = c; }
 	virtual void SetDiffuseAlpha( float f )		{ for(int i = 0; i < NUM_DIFFUSE_COLORS; ++i) { RageColor c = GetDiffuses( i ); c.a = f; SetDiffuses( i, c ); } }
 	float GetCurrentDiffuseAlpha() const		{ return m_current.diffuse[0].a; }
 	void SetDiffuseColor( RageColor c );
-	void SetDiffuses( int i, RageColor c )		{ DestTweenState().diffuse[i] = c; };
-	void SetDiffuseUpperLeft( RageColor c )		{ DestTweenState().diffuse[0] = c; };
-	void SetDiffuseUpperRight( RageColor c )	{ DestTweenState().diffuse[1] = c; };
-	void SetDiffuseLowerLeft( RageColor c )		{ DestTweenState().diffuse[2] = c; };
-	void SetDiffuseLowerRight( RageColor c )	{ DestTweenState().diffuse[3] = c; };
-	void SetDiffuseTopEdge( RageColor c )		{ DestTweenState().diffuse[0] = DestTweenState().diffuse[1] = c; };
-	void SetDiffuseRightEdge( RageColor c )		{ DestTweenState().diffuse[1] = DestTweenState().diffuse[3] = c; };
-	void SetDiffuseBottomEdge( RageColor c )	{ DestTweenState().diffuse[2] = DestTweenState().diffuse[3] = c; };
-	void SetDiffuseLeftEdge( RageColor c )		{ DestTweenState().diffuse[0] = DestTweenState().diffuse[2] = c; };
-	RageColor GetDiffuse() const			{ return DestTweenState().diffuse[0]; };
-	RageColor GetDiffuses( int i ) const		{ return DestTweenState().diffuse[i]; };
-	float GetDiffuseAlpha() const			{ return DestTweenState().diffuse[0].a; };
-	void SetGlow( RageColor c )			{ DestTweenState().glow = c; };
-	RageColor GetGlow() const			{ return DestTweenState().glow; };
+	void SetDiffuses( int i, RageColor c )		{ DestTweenState().diffuse[i] = c; }
+	void SetDiffuseUpperLeft( RageColor c )		{ DestTweenState().diffuse[0] = c; }
+	void SetDiffuseUpperRight( RageColor c )	{ DestTweenState().diffuse[1] = c; }
+	void SetDiffuseLowerLeft( RageColor c )		{ DestTweenState().diffuse[2] = c; }
+	void SetDiffuseLowerRight( RageColor c )	{ DestTweenState().diffuse[3] = c; }
+	void SetDiffuseTopEdge( RageColor c )		{ DestTweenState().diffuse[0] = DestTweenState().diffuse[1] = c; }
+	void SetDiffuseRightEdge( RageColor c )		{ DestTweenState().diffuse[1] = DestTweenState().diffuse[3] = c; }
+	void SetDiffuseBottomEdge( RageColor c )	{ DestTweenState().diffuse[2] = DestTweenState().diffuse[3] = c; }
+	void SetDiffuseLeftEdge( RageColor c )		{ DestTweenState().diffuse[0] = DestTweenState().diffuse[2] = c; }
+	RageColor GetDiffuse() const			{ return DestTweenState().diffuse[0]; }
+	RageColor GetDiffuses( int i ) const		{ return DestTweenState().diffuse[i]; }
+	float GetDiffuseAlpha() const			{ return DestTweenState().diffuse[0].a; }
+	void SetGlow( RageColor c )			{ DestTweenState().glow = c; }
+	RageColor GetGlow() const			{ return DestTweenState().glow; }
 
 	void SetAux( float f )				{ DestTweenState().aux = f; }
 	float GetAux() const				{ return m_current.aux; }
@@ -503,7 +503,7 @@ public:
 	};
 
 	void ScaleToCover( const RectF &rect )		{ ScaleTo( rect, cover ); }
-	void ScaleToFitInside( const RectF &rect )	{ ScaleTo( rect, fit_inside); };
+	void ScaleToFitInside( const RectF &rect )	{ ScaleTo( rect, fit_inside); }
 	void ScaleTo( const RectF &rect, StretchType st );
 
 	void StretchTo( const RectF &rect );

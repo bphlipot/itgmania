@@ -313,7 +313,7 @@ void LowLevelWindow_Win32::Update()
 
 const ActualVideoModeParams LowLevelWindow_Win32::GetActualVideoModeParams() const
 {
-	return GraphicsWindow::GetParams();
+	return ActualVideoModeParams{GraphicsWindow::GetParams()};
 }
 
 class RenderTarget_Win32 : public RenderTarget

@@ -60,7 +60,7 @@ void Banner::LoadFromCachedBanner( const RString &sPath )
 	bool bLowRes = (PREFSMAN->m_ImageCache != IMGCACHE_FULL);
 	if( !bLowRes )
 	{
-		ID = Sprite::SongBannerTexture( sPath );
+		ID = Sprite::SongBannerTexture( RageTextureID{sPath} );
 	}
 	else
 	{
@@ -71,7 +71,7 @@ void Banner::LoadFromCachedBanner( const RString &sPath )
 	if( TEXTUREMAN->IsTextureRegistered(ID) )
 		Load( ID );
 	else if( IsAFile(sPath) )
-		Load( sPath );
+		Load( RageTextureID{sPath} );
 	else
 		LoadFallback();
 }
@@ -110,7 +110,7 @@ void Banner::SetScrolling( bool bScroll, float Percent)
 void Banner::LoadFromSong( Song* pSong ) // nullptr means no song
 {
 	if( pSong == nullptr )	LoadFallback();
-	else if( pSong->HasBanner() ) Load( pSong->GetBannerPath() );
+	else if( pSong->HasBanner() ) Load( RageTextureID{pSong->GetBannerPath()} );
 	else					LoadFallback();
 
 	m_bScrolling = false;
@@ -118,14 +118,14 @@ void Banner::LoadFromSong( Song* pSong ) // nullptr means no song
 
 void Banner::LoadMode()
 {
-	Load( THEME->GetPathG("Banner","Mode") );
+	Load( RageTextureID{THEME->GetPathG("Banner","Mode")} );
 	m_bScrolling = (bool)SCROLL_MODE;
 }
 
 void Banner::LoadFromSongGroup( RString sSongGroup )
 {
 	RString sGroupBannerPath = SONGMAN->GetSongGroupBannerPath( sSongGroup );
-	if( sGroupBannerPath != "" )			Load( sGroupBannerPath );
+	if( sGroupBannerPath != "" )			Load( RageTextureID{sGroupBannerPath} );
 	else						LoadGroupFallback();
 	m_bScrolling = false;
 }
@@ -133,7 +133,7 @@ void Banner::LoadFromSongGroup( RString sSongGroup )
 void Banner::LoadFromCourse( const Course *pCourse )		// nullptr means no course
 {
 	if( pCourse == nullptr )				LoadFallback();
-	else if( pCourse->GetBannerPath() != "" )	Load( pCourse->GetBannerPath() );
+	else if( pCourse->GetBannerPath() != "" )	Load( RageTextureID{pCourse->GetBannerPath()} );
 	else						LoadCourseFallback();
 
 	m_bScrolling = false;
@@ -142,7 +142,7 @@ void Banner::LoadFromCourse( const Course *pCourse )		// nullptr means no course
 void Banner::LoadCardFromCharacter( const Character *pCharacter )
 {
 	if( pCharacter == nullptr )			LoadFallback();
-	else if( pCharacter->GetCardPath() != "" )	Load( pCharacter->GetCardPath() );
+	else if( pCharacter->GetCardPath() != "" )	Load( RageTextureID{pCharacter->GetCardPath()} );
 	else						LoadFallback();
 
 	m_bScrolling = false;
@@ -151,7 +151,7 @@ void Banner::LoadCardFromCharacter( const Character *pCharacter )
 void Banner::LoadIconFromCharacter( const Character *pCharacter )
 {
 	if( pCharacter == nullptr )			LoadFallbackCharacterIcon();
-	else if( pCharacter->GetIconPath() != "" )	Load( pCharacter->GetIconPath(), false );
+	else if( pCharacter->GetIconPath() != "" )	Load( RageTextureID{pCharacter->GetIconPath()}, false );
 	else						LoadFallbackCharacterIcon();
 
 	m_bScrolling = false;
@@ -164,7 +164,7 @@ void Banner::LoadBannerFromUnlockEntry( const UnlockEntry* pUE )
 	else 
 	{
 		RString sFile = pUE->GetBannerFile();
-		Load( sFile );
+		Load( RageTextureID{sFile} );
 		m_bScrolling = false;
 	}
 }
@@ -176,49 +176,49 @@ void Banner::LoadBackgroundFromUnlockEntry( const UnlockEntry* pUE )
 	else 
 	{
 		RString sFile = pUE->GetBackgroundFile();
-		Load( sFile );
+		Load( RageTextureID{sFile} );
 		m_bScrolling = false;
 	}
 }
 
 void Banner::LoadFallback()
 {
-	Load( THEME->GetPathG("Common","fallback banner") );
+	Load( RageTextureID{THEME->GetPathG("Common","fallback banner")} );
 }
 
 void Banner::LoadFallbackBG()
 {
-	Load( THEME->GetPathG("Common","fallback background") );
+	Load( RageTextureID{THEME->GetPathG("Common","fallback background")} );
 }
 
 void Banner::LoadGroupFallback()
 {
-	Load( THEME->GetPathG("Banner","group fallback") );
+	Load( RageTextureID{THEME->GetPathG("Banner","group fallback")} );
 }
 
 void Banner::LoadCourseFallback()
 {
-	Load( THEME->GetPathG("Banner","course fallback") );
+	Load( RageTextureID{THEME->GetPathG("Banner","course fallback")} );
 }
 
 void Banner::LoadFallbackCharacterIcon()
 {
 	Character *pCharacter = CHARMAN->GetDefaultCharacter();
 	if( pCharacter  &&  !pCharacter->GetIconPath().empty() )
-		Load( pCharacter->GetIconPath(), false );
+		Load( RageTextureID{pCharacter->GetIconPath()}, false );
 	else
 		LoadFallback();
 }
 
 void Banner::LoadRoulette()
 {
-	Load( THEME->GetPathG("Banner","roulette") );
+	Load( RageTextureID{THEME->GetPathG("Banner","roulette")} );
 	m_bScrolling = (bool)SCROLL_ROULETTE;
 }
 
 void Banner::LoadRandom()
 {
-	Load( THEME->GetPathG("Banner","random") );
+	Load( RageTextureID{THEME->GetPathG("Banner","random")} );
 	m_bScrolling = (bool)SCROLL_RANDOM;
 }
 
@@ -232,7 +232,7 @@ void Banner::LoadFromSortOrder( SortOrder so )
 	else
 	{
 		if( so != SORT_GROUP && so != SORT_RECENT )
-			Load( THEME->GetPathG("Banner",ssprintf("%s",SortOrderToString(so).c_str())) );
+			Load( RageTextureID{THEME->GetPathG("Banner",ssprintf("%s",SortOrderToString(so).c_str()))} );
 	}
 	m_bScrolling = (bool)SCROLL_SORT_ORDER;
 }
@@ -248,14 +248,22 @@ public:
 	static int ScaleToClipped( T* p, lua_State *L )			{ p->ScaleToClipped(FArg(1),FArg(2)); COMMON_RETURN_SELF; }
 	static int LoadFromSong( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadFromSong(nullptr); }
-		else { Song *pS = Luna<Song>::check(L,1); p->LoadFromSong( pS ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadFromSong(nullptr);
+		} else {
+			Song *pS = Luna<Song>::check(L,1);
+			p->LoadFromSong( pS );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadFromCourse( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadFromCourse(nullptr); }
-		else { Course *pC = Luna<Course>::check(L,1); p->LoadFromCourse( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadFromCourse(nullptr);
+		} else {
+			Course *pC = Luna<Course>::check(L,1);
+			p->LoadFromCourse( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadFromCachedBanner( T* p, lua_State *L )
@@ -265,26 +273,42 @@ public:
 	}
 	static int LoadIconFromCharacter( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadIconFromCharacter(nullptr); }
-		else { Character *pC = Luna<Character>::check(L,1); p->LoadIconFromCharacter( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadIconFromCharacter(nullptr);
+		} else {
+			Character *pC = Luna<Character>::check(L,1);
+			p->LoadIconFromCharacter( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadCardFromCharacter( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadIconFromCharacter(nullptr); }
-		else { Character *pC = Luna<Character>::check(L,1); p->LoadIconFromCharacter( pC ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadCardFromCharacter(nullptr);
+		} else {
+			Character *pC = Luna<Character>::check(L,1);
+			p->LoadCardFromCharacter( pC );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadBannerFromUnlockEntry( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadBannerFromUnlockEntry(nullptr); }
-		else { UnlockEntry *pUE = Luna<UnlockEntry>::check(L,1); p->LoadBannerFromUnlockEntry( pUE ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadBannerFromUnlockEntry(nullptr);
+		} else {
+			UnlockEntry *pUE = Luna<UnlockEntry>::check(L,1);
+			p->LoadBannerFromUnlockEntry( pUE );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadBackgroundFromUnlockEntry( T* p, lua_State *L )
 	{ 
-		if( lua_isnil(L,1) ) { p->LoadBackgroundFromUnlockEntry(nullptr); }
-		else { UnlockEntry *pUE = Luna<UnlockEntry>::check(L,1); p->LoadBackgroundFromUnlockEntry( pUE ); }
+		if( lua_isnil(L,1) ) {
+			p->LoadBackgroundFromUnlockEntry(nullptr);
+		} else {
+			UnlockEntry *pUE = Luna<UnlockEntry>::check(L,1);
+			p->LoadBackgroundFromUnlockEntry( pUE );
+		}
 		COMMON_RETURN_SELF;
 	}
 	static int LoadFromSongGroup( T* p, lua_State *L )
@@ -294,9 +318,9 @@ public:
 	}
 	static int LoadFromSortOrder( T* p, lua_State *L )
 	{
-		if( lua_isnil(L,1) ) { p->LoadFromSortOrder( SortOrder_Invalid ); }
-		else
-		{
+		if( lua_isnil(L,1) ) {
+			p->LoadFromSortOrder( SortOrder_Invalid );
+		} else {
 			SortOrder so = Enum::Check<SortOrder>(L, 1);
 			p->LoadFromSortOrder( so );
 		}

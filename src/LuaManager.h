@@ -158,7 +158,7 @@ namespace LuaHelpers
 	}
 
 	int TypeError( Lua *L, int narg, const char *tname );
-	inline int AbsIndex( Lua *L, int i ) { if( i > 0 || i <= LUA_REGISTRYINDEX ) return i; return lua_gettop( L ) + i + 1; }
+	inline int AbsIndex( Lua *L, int i ) { return ( i > 0 || i <= LUA_REGISTRYINDEX ) ? i : lua_gettop( L ) + i + 1; }
 }
 
 class LuaThreadVariable
@@ -166,7 +166,7 @@ class LuaThreadVariable
 public:
 	LuaThreadVariable( const RString &sName, const RString &sValue );
 	LuaThreadVariable( const RString &sName, const LuaReference &Value );
-	LuaThreadVariable( lua_State *L ); // name and value are on stack
+	explicit LuaThreadVariable( lua_State *L ); // name and value are on stack
 	~LuaThreadVariable();
 	static void GetThreadVariable( lua_State *L );
 

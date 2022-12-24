@@ -27,7 +27,7 @@ public:
 	void SwapBuffers();
 	void Update();
 
-	const ActualVideoModeParams GetActualVideoModeParams() const { return m_CurrentParams; }
+	const ActualVideoModeParams GetActualVideoModeParams() const { return ActualVideoModeParams{m_CurrentParams}; }
 
 	bool SupportsRenderToTexture() const { return true; }
 	RenderTarget *CreateRenderTarget();

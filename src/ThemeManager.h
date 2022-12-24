@@ -44,10 +44,10 @@ public:
 	bool DoesLanguageExist( const RString &sLanguage );
 	void SwitchThemeAndLanguage( const RString &sThemeName, const RString &sLanguage, bool bPseudoLocalize, bool bForceThemeReload = false );
 	void UpdateLuaGlobals();
-	RString GetCurThemeName() const { return m_sCurThemeName; };
-	bool IsThemeLoaded() const { return !m_sCurThemeName.empty(); };
-	RString GetCurLanguage() const { return m_sCurLanguage; };
-	RString GetCurThemeDir() const { return GetThemeDirFromName(m_sCurThemeName); };
+	RString GetCurThemeName() const { return m_sCurThemeName; }
+	bool IsThemeLoaded() const { return !m_sCurThemeName.empty(); }
+	RString GetCurLanguage() const { return m_sCurLanguage; }
+	RString GetCurThemeDir() const { return GetThemeDirFromName(m_sCurThemeName); }
 	RString GetNextTheme();
 	RString GetNextSelectableTheme();
 	void ReloadMetrics();
@@ -66,11 +66,11 @@ public:
 
 	bool GetPathInfo( PathInfo &out, ElementCategory category, const RString &sMetricsGroup, const RString &sElement, bool bOptional=false );
 	RString GetPath( ElementCategory category, const RString &sMetricsGroup, const RString &sElement, bool bOptional=false );
-	RString GetPathB( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_BGANIMATIONS,sMetricsGroup,sElement,bOptional); };
-	RString GetPathF( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_FONTS,sMetricsGroup,sElement,bOptional); };
-	RString GetPathG( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_GRAPHICS,sMetricsGroup,sElement,bOptional); };
-	RString GetPathS( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_SOUNDS,sMetricsGroup,sElement,bOptional); };
-	RString GetPathO( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_OTHER,sMetricsGroup,sElement,bOptional); };
+	RString GetPathB( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_BGANIMATIONS,sMetricsGroup,sElement,bOptional); }
+	RString GetPathF( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_FONTS,sMetricsGroup,sElement,bOptional); }
+	RString GetPathG( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_GRAPHICS,sMetricsGroup,sElement,bOptional); }
+	RString GetPathS( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_SOUNDS,sMetricsGroup,sElement,bOptional); }
+	RString GetPathO( const RString &sMetricsGroup, const RString &sElement, bool bOptional=false ) { return GetPath(EC_OTHER,sMetricsGroup,sElement,bOptional); }
 	void ClearThemePathCache();
 
 	bool		HasMetric( const RString &sMetricsGroup, const RString &sValueName );

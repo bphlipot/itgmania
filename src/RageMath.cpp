@@ -403,7 +403,7 @@ RageVector4 RageQuatFromR(float theta )
 }
 
 
-/* Math from http://www.gamasutra.com/features/19980703/quaternions_01.htm . */
+// Math from http://www.gamasutra.com/features/19980703/quaternions_01.htm
 
 /* prh.xyz -> heading, pitch, roll */
 void RageQuatFromHPR(RageVector4* pOut, RageVector3 hpr )

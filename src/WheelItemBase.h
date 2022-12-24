@@ -38,7 +38,7 @@ struct WheelItemBaseData
 class WheelItemBase : public ActorFrame
 {
 public:
-	WheelItemBase( RString sType );
+	explicit WheelItemBase( RString sType );
 	WheelItemBase( const WheelItemBase &cpy );
 	virtual void DrawPrimitives();
 	virtual WheelItemBase *Copy() const { return new WheelItemBase(*this); }

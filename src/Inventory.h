@@ -20,7 +20,7 @@ public:
 	void Load( PlayerState* pPlayerState );
 
 	virtual void Update( float fDelta );
-	virtual void DrawPrimitives() {};
+	virtual void DrawPrimitives() {}
 
 	void UseItem( int iSlot );
 

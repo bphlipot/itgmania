@@ -3,6 +3,7 @@
 #ifndef RAGE_SOUND_READER_CHANNEL_SPLIT
 #define RAGE_SOUND_READER_CHANNEL_SPLIT
 
+#include "global.h"
 #include "RageSoundReader.h"
 
 class RageSoundSplitterImpl;
@@ -28,7 +29,7 @@ public:
 	void AddSourceChannelToSound( int iFromChannel, int iToChannel );
 
 private:
-	RageSoundReader_Split( RageSoundSplitterImpl *pImpl ); // create with RageSoundSplitter
+	explicit RageSoundReader_Split( RageSoundSplitterImpl *pImpl ); // create with RageSoundSplitter
 	friend class RageSoundSplitterImpl;
 	friend class RageSoundSplitter;
 
@@ -49,7 +50,7 @@ private:
 class RageSoundSplitter
 {
 public:
-	RageSoundSplitter( RageSoundReader *pSource );
+	explicit RageSoundSplitter( RageSoundReader *pSource );
 	~RageSoundSplitter();
 	RageSoundReader_Split *CreateSound();
 

@@ -18,8 +18,6 @@
 #include "SpecialFiles.h"
 #include "RageLog.h"
 
-using namespace StringConversion;
-
 static void GetPrefsDefaultModifiers( PlayerOptions &po, SongOptions &so )
 {
 	po.FromString( PREFSMAN->m_sDefaultModifiers );
@@ -97,11 +95,11 @@ static void MoveMap( int &sel, IPreference &opt, bool ToSel, const T *mapping, u
 		RString sOpt = opt.ToString();
 		// This should really be T, but we can't FromString an enum.
 		float val;
-		FromString( sOpt, val );
+		StringConversion::FromString( sOpt, val );
 		sel = FindClosestEntry( val, mapping, cnt );
 	} else {
 		// sel -> opt
-		RString sOpt = ToString( mapping[sel] );
+		RString sOpt = StringConversion::ToString( mapping[sel] );
 		opt.FromString( sOpt );
 	}
 }
@@ -127,12 +125,12 @@ static void MovePref( int &iSel, bool bToSel, const ConfOption *pConfOption )
 		// TODO: why not get the int directly from pPref?
 		// Why are we writing it to a string and then back?
 		T t;
-		FromString( pPref->ToString(), t );
+		StringConversion::FromString( pPref->ToString(), t );
 		iSel = static_cast<int>( t );
 	}
 	else
 	{
-		pPref->FromString( ToString( static_cast<T>( iSel ) ) );
+		pPref->FromString( StringConversion::ToString( static_cast<T>( iSel ) ) );
 	}
 }
 
@@ -147,7 +145,7 @@ void MovePref<bool>( int &iSel, bool bToSel, const ConfOption *pConfOption )
 		// TODO: why not get the int directly from pPref?
 		// Why are we writing it to a string and then back?
 		bool b;
-		FromString( pPref->ToString(), b );
+		StringConversion::FromString( pPref->ToString(), b );
 		iSel = b ? 1 : 0;
 	}
 	else
@@ -155,7 +153,7 @@ void MovePref<bool>( int &iSel, bool bToSel, const ConfOption *pConfOption )
 		// If we don't make a specific instantiation of MovePref<bool>, there is
 		// a compile warning here because of static_cast<bool>( iSel ) where
 		// iSel is an int. What is the best way to remove that compile warning?
-		pPref->FromString( ToString<bool>( iSel ? true : false ) );
+		pPref->FromString( StringConversion::ToString<bool>( iSel ? true : false ) );
 	}
 }
 

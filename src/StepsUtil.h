@@ -105,7 +105,7 @@ public:
 	 * @brief Compare two sets of Songs and Steps to see if they are not equal.
 	 * @param other the other set of SongAndSteps.
 	 * @return true if the two sets of Songs and Steps are not equal, false otherwise. */
-	bool operator<( const SongAndSteps& other ) const { if( pSong!=other.pSong ) return pSong<other.pSong; return pSteps<other.pSteps; }
+	bool operator<( const SongAndSteps& other ) const { return pSong!=other.pSong ? pSong<other.pSong : pSteps<other.pSteps; }
 };
 
 /** @brief Utility functions for working with Steps. */

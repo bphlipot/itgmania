@@ -63,7 +63,7 @@ public:
 	void RegisterTextureForUpdating(RageTextureID id, RageTexture* tex);
 
 	bool SetPrefs( RageTextureManagerPrefs prefs );
-	RageTextureManagerPrefs GetPrefs() { return m_Prefs; };
+	RageTextureManagerPrefs GetPrefs() { return m_Prefs; }
 
 	RageTextureID::TexPolicy GetDefaultTexturePolicy() const { return m_TexturePolicy; }
 	void SetDefaultTexturePolicy( RageTextureID::TexPolicy p ) { m_TexturePolicy = p; }

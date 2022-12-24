@@ -118,7 +118,7 @@ public:
 		saved_prefs_invalid_for_course
 	};
 	void ResetPrefs( ResetPrefsType type );
-	void ResetSavedPrefs() { ResetPrefs(saved_prefs); };
+	void ResetSavedPrefs() { ResetPrefs(saved_prefs); }
 	void ResetSavedPrefsInvalidForCourse() { ResetPrefs(saved_prefs_invalid_for_course); }
 	void GetMods( std::vector<RString> &AddTo, bool bForceNoteSkin = false ) const;
 	void GetLocalizedMods( std::vector<RString> &AddTo ) const;

@@ -38,7 +38,7 @@ class TitleSubst
 
 	void AddTrans(const TitleTrans &tr);
 public:
-	TitleSubst(const RString &section);
+	explicit TitleSubst(const RString &section);
 	~TitleSubst();
 
 	void Load(const RString &filename, const RString &section);

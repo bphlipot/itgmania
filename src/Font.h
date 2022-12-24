@@ -182,9 +182,9 @@ public:
 
 	void SetDefaultGlyph( FontPage *pPage );
 
-	bool IsRightToLeft() const { return m_bRightToLeft; };
-	bool IsDistanceField() const { return m_bDistanceField; };
-	const RageColor &GetDefaultStrokeColor() const { return m_DefaultStrokeColor; };
+	bool IsRightToLeft() const { return m_bRightToLeft; }
+	bool IsDistanceField() const { return m_bDistanceField; }
+	const RageColor &GetDefaultStrokeColor() const { return m_DefaultStrokeColor; }
 
 private:
 	/** @brief List of pages and fonts that we use (and are responsible for freeing). */

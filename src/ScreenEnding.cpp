@@ -90,7 +90,7 @@ void ScreenEnding::Init()
 			continue;
 	
 		m_sprRemoveMemoryCard[p].SetName( ssprintf("RemoveCardP%d",p+1) );
-		m_sprRemoveMemoryCard[p].Load( THEME->GetPathG("ScreenEnding",ssprintf("remove card P%d",p+1)) );
+		m_sprRemoveMemoryCard[p].Load( RageTextureID{THEME->GetPathG("ScreenEnding",ssprintf("remove card P%d",p+1))} );
 		switch( MEMCARDMAN->GetCardState(p) )
 		{
 			case MemoryCardState_Removed:

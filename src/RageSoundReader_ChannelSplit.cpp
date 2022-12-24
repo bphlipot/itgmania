@@ -49,7 +49,7 @@ class RageSoundReader_Split;
 class RageSoundSplitterImpl
 {
 public:
-	RageSoundSplitterImpl( RageSoundReader *pSource )
+	explicit RageSoundSplitterImpl( RageSoundReader *pSource )
 	{
 		m_iRefCount = 1;
 		m_pSource = pSource;

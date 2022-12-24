@@ -32,7 +32,7 @@ static RageTimer g_LastFrameEndedAt( RageZeroTimer );
 
 struct Centering
 {
-	Centering( int iTranslateX = 0, int iTranslateY = 0, int iAddWidth = 0, int iAddHeight = 0 ):
+	explicit Centering( int iTranslateX = 0, int iTranslateY = 0, int iAddWidth = 0, int iAddHeight = 0 ):
 		m_iTranslateX( iTranslateX ),
 		m_iTranslateY( iTranslateY ),
 		m_iAddWidth( iAddWidth ),
@@ -242,13 +242,14 @@ void RageDisplay::DrawLineStripInternal( const RageSpriteVertex v[], int iNumVer
 
 void RageDisplay::DrawCircleInternal( const RageSpriteVertex &p, float radius )
 {
-	const int subdivisions = 32;
-	RageSpriteVertex v[subdivisions+2];
+	static constexpr int kSubdivisions = 32;
+	static constexpr int kVSize = kSubdivisions + 2;
+	RageSpriteVertex v[kVSize];
 	v[0] = p;
 
-	for(int i = 0; i < subdivisions+1; ++i) 
+	for(int i = 0; i < kSubdivisions+1; ++i) 
 	{
-		const float fRotation = float(i) / subdivisions * 2*PI;
+		const float fRotation = float(i) / kSubdivisions * 2*PI;
 		const float fX = RageFastCos(fRotation) * radius;
 		const float fY = -RageFastSin(fRotation) * radius;
 		v[1+i] = v[0];
@@ -256,7 +257,7 @@ void RageDisplay::DrawCircleInternal( const RageSpriteVertex &p, float radius )
 		v[1+i].p.y += fY;
 	}
 
-	this->DrawFan( v, subdivisions+2 );
+	this->DrawFan( v, kSubdivisions+2 );
 }
 
 

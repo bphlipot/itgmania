@@ -24,7 +24,7 @@ struct SMLoader
 {
 	SMLoader() : fileExt(".sm"), songTitle() {}
 	
-	SMLoader(RString ext) : fileExt(ext), songTitle() {}
+	explicit SMLoader(RString ext) : fileExt(ext), songTitle() {}
 	
 	virtual ~SMLoader() {}
 	

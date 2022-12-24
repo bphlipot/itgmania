@@ -10,7 +10,7 @@ struct lua_State;
 class RageTexture
 {
 public:
-	RageTexture( RageTextureID file );
+	explicit RageTexture( RageTextureID file );
 	virtual ~RageTexture() = 0;
 	virtual void Update( float /* fDeltaTime */ ) {}
 	virtual void Reload() {}

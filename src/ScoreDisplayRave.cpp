@@ -15,7 +15,7 @@ ScoreDisplayRave::ScoreDisplayRave()
 
 	for( int i=0; i<NUM_ATTACK_LEVELS; i++ )
 	{
-		m_sprMeter[i].Load( THEME->GetPathG("ScoreDisplayRave",ssprintf("stream level%d",i+1)) );
+		m_sprMeter[i].Load( RageTextureID{THEME->GetPathG("ScoreDisplayRave",ssprintf("stream level%d",i+1))} );
 		m_sprMeter[i].SetCropRight( 1.f );
 	}
 

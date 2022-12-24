@@ -8,7 +8,7 @@
 class RageSoundReader_Filter: public RageSoundReader
 {
 public:
-	RageSoundReader_Filter( RageSoundReader *pSource ):
+	explicit RageSoundReader_Filter( RageSoundReader *pSource ):
 		m_pSource( pSource )
 	{
 	}

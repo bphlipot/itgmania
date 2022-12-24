@@ -22,6 +22,7 @@ public:
 	void LoadMode();
 	void LoadFromSongGroup( RString sSongGroup );
 	void LoadFromCourse( const Course* pCourse );
+	void LoadCardFromCharacter( Character* pCharacter );
 	void LoadIconFromCharacter( Character* pCharacter );
 	void LoadBannerFromUnlockEntry( const UnlockEntry* pUE );
 	void LoadRoulette();

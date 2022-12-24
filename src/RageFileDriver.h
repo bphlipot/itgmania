@@ -3,6 +3,7 @@
 #ifndef RAGE_FILE_DRIVER_H
 #define RAGE_FILE_DRIVER_H
 
+#include "global.h"
 #include "RageFileManager.h"
 
 class RageFileBasic;
@@ -10,7 +11,7 @@ class FilenameDB;
 class RageFileDriver
 {
 public:
-	RageFileDriver( FilenameDB *pDB ) { FDB = pDB; }
+	explicit RageFileDriver( FilenameDB *pDB ) { FDB = pDB; }
 	virtual ~RageFileDriver();
 	virtual RageFileBasic *Open( const RString &sPath, int iMode, int &iError ) = 0;
 	virtual void GetDirListing( const RString &sPath, std::vector<RString> &asAddTo, bool bOnlyDirs, bool bReturnPathToo );
@@ -35,7 +36,7 @@ public:
 /* This is used to register the driver, so RageFileManager can see it. */
 struct FileDriverEntry
 {
-	FileDriverEntry( const RString &sType );
+	explicit FileDriverEntry( const RString &sType );
 	virtual ~FileDriverEntry();
 	virtual RageFileDriver *Create( const RString &sRoot ) const = 0;
 

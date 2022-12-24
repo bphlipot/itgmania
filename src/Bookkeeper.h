@@ -52,7 +52,7 @@ private:
 		/**
 		 * @brief Set up a date based on the given time.
 		 * @param time the time to turn into a Date. */
-		Date( tm time ) { Set(time); }
+		explicit Date( tm time ) { Set(time); }
 		void Set( time_t t );
 		void Set( tm pTime );
 		bool operator<( const Date &rhs ) const;

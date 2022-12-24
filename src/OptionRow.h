@@ -54,7 +54,7 @@ private:
 class OptionRow : public ActorFrame
 {
 public:
-	OptionRow( const OptionRowType *pType );
+	explicit OptionRow( const OptionRowType *pType );
 	~OptionRow();
 
 	void Clear();

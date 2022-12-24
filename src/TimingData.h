@@ -63,7 +63,7 @@ public:
 	/**
 	 * @brief Sets up initial timing data with a defined offset.
 	 * @param fOffset the offset from the 0th beat. */
-	TimingData( float fOffset = 0 );
+	explicit TimingData( float fOffset = 0 );
 	~TimingData();
 
 	void Copy( const TimingData &other );

@@ -3,12 +3,13 @@
 #ifndef RAGE_SOUND_READER_EXTEND
 #define RAGE_SOUND_READER_EXTEND
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 
 class RageSoundReader_Extend: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_Extend( RageSoundReader *pSource );
+	explicit RageSoundReader_Extend( RageSoundReader *pSource );
 	virtual int SetPosition( int iFrame );
 	virtual int Read( float *pBuffer, int iFrames );
 	virtual int GetNextSourceFrame() const;

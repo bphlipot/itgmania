@@ -7,7 +7,7 @@ const wchar_t FontCharmaps::M_SKIP = 0xFEFF;
 
 static std::map<RString, const wchar_t*> charmaps;
 
-using namespace FontCharmaps;
+namespace FontCharmaps {
 
 /* Map ranges of Unicode characters.  This is for font mapping; don't try
  * to use it for actual conversion (if that's wanted, use iconv).
@@ -218,7 +218,7 @@ static void Init()
 	charmaps["numbers"] = map_numbers;
 }
 
-const wchar_t *FontCharmaps::get_char_map(RString name)
+const wchar_t *get_char_map(RString name)
 {
 	Init();
 
@@ -230,6 +230,8 @@ const wchar_t *FontCharmaps::get_char_map(RString name)
 
 	return i->second;
 }
+
+} // namespace FontCharmaps
 
 /*
  * (c) 2003 Glenn Maynard

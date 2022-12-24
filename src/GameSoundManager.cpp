@@ -60,7 +60,7 @@ struct MusicPlaying
 	 * song that's starting. We'll copy it to m_Timing once sound is heard. */
 	TimingData m_NewTiming;
 	RageSound *m_Music;
-	MusicPlaying( RageSound *Music )
+	explicit MusicPlaying( RageSound *Music )
 	{
 		m_Timing.AddSegment( BPMSegment(0,120) );
 		m_NewTiming.AddSegment( BPMSegment(0,120) );

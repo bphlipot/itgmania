@@ -4,9 +4,8 @@
 #include "RageUtil.h"
 #include "RageLog.h"
 #include "RageSurface.h"
-using namespace FileReading;
 
-/* Tested with http://entropymine.com/jason/bmpsuite/. */
+// Tested with http://entropymine.com/jason/bmpsuite/.
 
 enum
 {
@@ -27,7 +26,7 @@ enum
 static RageSurfaceUtils::OpenResult LoadBMP( RageFile &f, RageSurface *&img, RString &sError )
 {
 	char magic[2];
-	ReadBytes( f, magic, 2, sError );
+	FileReading::ReadBytes( f, magic, 2, sError );
 	if( magic[0] != 'B' || magic[1] != 'M' )
 	{
 		sError = "not a BMP";
@@ -36,32 +35,32 @@ static RageSurfaceUtils::OpenResult LoadBMP( RageFile &f, RageSurface *&img, RSt
 
 	img = nullptr;
 
-	read_u32_le( f, sError ); /* file size */
-	read_u32_le( f, sError ); /* unused */
-	uint32_t iDataOffset = read_u32_le( f, sError );
-	uint32_t iHeaderSize = read_u32_le( f, sError );
+	FileReading::read_u32_le( f, sError ); /* file size */
+	FileReading::read_u32_le( f, sError ); /* unused */
+	uint32_t iDataOffset = FileReading::read_u32_le( f, sError );
+	uint32_t iHeaderSize = FileReading::read_u32_le( f, sError );
 
 	uint32_t iWidth, iHeight, iPlanes, iBPP, iCompression = COMP_BI_RGB, iColors = 0;
 	if( iHeaderSize == 12 )
 	{
 		/* OS/2 format */
-		iWidth = read_u16_le( f, sError );
-		iHeight = read_u16_le( f, sError );
-		iPlanes = read_u16_le( f, sError );
-		iBPP = read_u16_le( f, sError );
+		iWidth = FileReading::read_u16_le( f, sError );
+		iHeight = FileReading::read_u16_le( f, sError );
+		iPlanes = FileReading::read_u16_le( f, sError );
+		iBPP = FileReading::read_u16_le( f, sError );
 	}
 	else if( iHeaderSize == 40 )
 	{
-		iWidth = read_u32_le( f, sError );
-		iHeight = read_u32_le( f, sError );
-		iPlanes = read_u16_le( f, sError );
-		iBPP = read_u16_le( f, sError );
-		iCompression = read_u32_le( f, sError );
-		read_u32_le( f, sError ); /* bitmap size */
-		read_u32_le( f, sError ); /* horiz resolution */
-		read_u32_le( f, sError ); /* vert resolution */
-		iColors = read_u32_le( f, sError );
-		read_u32_le( f, sError ); /* "important" colors */
+		iWidth = FileReading::read_u32_le( f, sError );
+		iHeight = FileReading::read_u32_le( f, sError );
+		iPlanes = FileReading::read_u16_le( f, sError );
+		iBPP = FileReading::read_u16_le( f, sError );
+		iCompression = FileReading::read_u32_le( f, sError );
+		FileReading::read_u32_le( f, sError ); /* bitmap size */
+		FileReading::read_u32_le( f, sError ); /* horiz resolution */
+		FileReading::read_u32_le( f, sError ); /* vert resolution */
+		iColors = FileReading::read_u32_le( f, sError );
+		FileReading::read_u32_le( f, sError ); /* "important" colors */
 	}
 	else
 		FATAL_ERROR( ssprintf( "expected header size of 40, got %u", iHeaderSize ) );
@@ -103,9 +102,9 @@ static RageSurfaceUtils::OpenResult LoadBMP( RageFile &f, RageSurface *&img, RSt
 
 	if( iCompression == COMP_BI_BITFIELDS )
 	{
-		Rmask = read_u32_le( f, sError );
-		Gmask = read_u32_le( f, sError );
-		Bmask = read_u32_le( f, sError );
+		Rmask = FileReading::read_u32_le( f, sError );
+		Gmask = FileReading::read_u32_le( f, sError );
+		Bmask = FileReading::read_u32_le( f, sError );
 	}
 
 	/* Stop on error before we use any of the values we just read. */
@@ -124,13 +123,13 @@ static RageSurfaceUtils::OpenResult LoadBMP( RageFile &f, RageSurface *&img, RSt
 
 		for( unsigned i = 0; i < iColors; ++i )
 		{
-			Palette[i].b = read_8( f, sError );
-			Palette[i].g = read_8( f, sError );
-			Palette[i].r = read_8( f, sError );
+			Palette[i].b = FileReading::read_8( f, sError );
+			Palette[i].g = FileReading::read_8( f, sError );
+			Palette[i].r = FileReading::read_8( f, sError );
 			Palette[i].a = 0xFF;
 			/* Windows BMP palettes are padded to 32bpp.  */
 			if( iHeaderSize == 40 )
-				read_8( f, sError );
+				FileReading::read_8( f, sError );
 		}
 
 		memcpy( img->fmt.palette->colors, Palette, sizeof(Palette) );

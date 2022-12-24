@@ -84,7 +84,7 @@ struct HttpRequestArgs
 class HttpRequestFuture
 {
 public:
-	HttpRequestFuture(ix::HttpRequestArgsPtr& args) : args(args) {};
+	explicit HttpRequestFuture(ix::HttpRequestArgsPtr& args) : args(args) {}
 
 	static int Collect(lua_State *L);
 	static int Cancel(lua_State *L);
@@ -109,7 +109,7 @@ struct WebSocketArgs
 class WebSocketHandle
 {
 public:
-	WebSocketHandle() {};
+	WebSocketHandle() {}
 
 	static int Collect(lua_State *L);
 	static int Close(lua_State *L);

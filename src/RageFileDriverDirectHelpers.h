@@ -3,6 +3,8 @@
 #ifndef RAGE_FILE_DRIVER_DIRECT_HELPERS_H
 #define RAGE_FILE_DRIVER_DIRECT_HELPERS_H
 
+#include "global.h"
+
 #if defined(HAVE_FCNTL_H)
 #include <fcntl.h>
 #endif
@@ -45,7 +47,7 @@ bool CreateDirectories( RString sPath );
 class DirectFilenameDB: public FilenameDB
 {
 public:
-	DirectFilenameDB( RString root );
+	explicit DirectFilenameDB( RString root );
 	void SetRoot( RString root );
 	void CacheFile( const RString &sPath );
 protected:

@@ -87,7 +87,7 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 			sSongBGPath = THEME->GetPathG("Common","fallback background");
 
 		Sprite* pSprite = new Sprite;
-		pSprite->Load( Sprite::SongBGTexture(sSongBGPath) );
+		pSprite->Load( Sprite::SongBGTexture(RageTextureID{sSongBGPath}) );
 		pSprite->StretchTo( FullScreenRectF );
 		this->AddChild( pSprite );
 
@@ -165,7 +165,7 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 			m_Type = TYPE_SPRITE;
 			Sprite* pSprite = new Sprite;
 			this->AddChild( pSprite );
-			pSprite->Load( sPath );
+			pSprite->Load( RageTextureID{sPath} );
 			pSprite->SetXY( SCREEN_CENTER_X, SCREEN_CENTER_Y );
 		}
 		break;
@@ -202,7 +202,7 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 			m_Type = TYPE_SPRITE;
 			Sprite* pSprite = new Sprite;
 			this->AddChild( pSprite );
-			pSprite->Load( Sprite::SongBGTexture(sPath) );
+			pSprite->Load( Sprite::SongBGTexture(RageTextureID{sPath}) );
 			const RectF StretchedFullScreenRectF(
 				FullScreenRectF.left-200,
 				FullScreenRectF.top-200,
@@ -223,7 +223,7 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 		{
 			m_Type = TYPE_PARTICLES;
 			Sprite s;
-			s.Load( sPath );
+			s.Load( RageTextureID{sPath} );
 			int iSpriteArea = int( s.GetUnzoomedWidth()*s.GetUnzoomedHeight() );
 			const int iMaxArea = int(SCREEN_WIDTH*SCREEN_HEIGHT);
 			int iNumParticles = iMaxArea / iSpriteArea;
@@ -233,7 +233,7 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 			{
 				Sprite* pSprite = new Sprite;
 				this->AddChild( pSprite );
-				pSprite->Load( sPath );
+				pSprite->Load( RageTextureID{sPath} );
 				pSprite->SetZoom( 0.7f + 0.6f*i/(float)iNumParticles );
 				switch( effect )
 				{
@@ -348,25 +348,35 @@ void BGAnimationLayer::LoadFromAniLayerFile( const RString& sPath )
 	RString sHint = sPath;
 	sHint.MakeLower();
 
-	if( sHint.find("cyclecolor") != RString::npos )
-		for( unsigned i=0; i<m_SubActors.size(); i++ )
+	if( sHint.find("cyclecolor") != RString::npos ) {
+		for( unsigned i=0; i<m_SubActors.size(); i++ ) {
 			m_SubActors[i]->SetEffectRainbow( 5 );
+		}
+	}
 
-	if( sHint.find("cyclealpha") != RString::npos )
-		for( unsigned i=0; i<m_SubActors.size(); i++ )
+	if( sHint.find("cyclealpha") != RString::npos ) {
+		for( unsigned i=0; i<m_SubActors.size(); i++ ) {
 			m_SubActors[i]->SetEffectDiffuseShift( 2, RageColor(1,1,1,1), RageColor(1,1,1,0) );
+		}
+	}
 
-	if( sHint.find("startonrandomframe") != RString::npos )
-		for( unsigned i=0; i<m_SubActors.size(); i++ )
+	if( sHint.find("startonrandomframe") != RString::npos ) {
+		for( unsigned i=0; i<m_SubActors.size(); i++ ) {
 			m_SubActors[i]->SetState( RandomInt(m_SubActors[i]->GetNumStates()) );
+		}
+	}
 
-	if( sHint.find("dontanimate") != RString::npos )
-		for( unsigned i=0; i<m_SubActors.size(); i++ )
+	if( sHint.find("dontanimate") != RString::npos ) {
+		for( unsigned i=0; i<m_SubActors.size(); i++ ) {
 			m_SubActors[i]->StopAnimating();
+		}
+	}
 
-	if( sHint.find("add") != RString::npos )
-		for( unsigned i=0; i<m_SubActors.size(); i++ )
+	if( sHint.find("add") != RString::npos ) {
+		for( unsigned i=0; i<m_SubActors.size(); i++ ) {
 			m_SubActors[i]->SetBlendMode( BLEND_ADD );
+		}
+	}
 }
 
 void BGAnimationLayer::LoadFromNode( const XNode* pNode )

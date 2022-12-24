@@ -107,8 +107,8 @@ protected:
 private:
 	//use getWheelItemsData instead of touching this one
 	enum {INVALID,NEEDREFILTER,VALID} m_WheelItemDatasStatus[NUM_SortOrder];
-	std::vector<MusicWheelItemData *> m__WheelItemDatas[NUM_SortOrder];
-	std::vector<MusicWheelItemData *> m__UnFilteredWheelItemDatas[NUM_SortOrder];
+	std::vector<MusicWheelItemData *> m_WheelItemDatas[NUM_SortOrder];
+	std::vector<MusicWheelItemData *> m_UnFilteredWheelItemDatas[NUM_SortOrder];
 
 	void BuildWheelItemDatas( std::vector<MusicWheelItemData *> &arrayWheelItems, SortOrder so );
 	void FilterWheelItemDatas(std::vector<MusicWheelItemData *> &aUnFilteredDatas, std::vector<MusicWheelItemData *> &aFilteredData, SortOrder so );

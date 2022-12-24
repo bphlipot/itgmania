@@ -25,11 +25,11 @@ void ScreenTestSound::Init()
 		"a  Set autostop\n"
 		"c  Set continue");
 
-	for( int i = 0; i < nsounds; ++i )
+	for (Sound& sound : s)
 	{
-		this->AddChild(&s[i].txt);
-		s[i].txt.LoadFromFont( THEME->GetPathF("Common","normal") );
-		s[i].txt.SetZoom(.5f);
+		this->AddChild(&sound.txt);
+		sound.txt.LoadFromFont( THEME->GetPathF("Common","normal") );
+		sound.txt.SetZoom(.5f);
 	}
 
 	s[0].txt.SetXY(150, 100);
@@ -53,8 +53,8 @@ void ScreenTestSound::Init()
 	RageSoundParams p;
 	p.StopMode = RageSoundParams::M_STOP;
 	// p.m_fRate = 1.20f;
-	for( int i = 0; i < nsounds; ++i )
-		s[i].s.SetParams( p );
+	for (Sound& sound : s)
+		sound.s.SetParams( p );
 
 //s[0].s.SetStopMode(RageSound::M_LOOP);
 //s[0].s.Play(false);
@@ -66,10 +66,9 @@ void ScreenTestSound::Init()
 
 ScreenTestSound::~ScreenTestSound()
 {
-	for( int i = 0; i < nsounds; ++i )
+	for (std::vector<RageSound *> &snds: m_sSoundCopies)
 	{
 		/* Delete copied sounds. */
-		std::vector<RageSound *> &snds = m_sSoundCopies[i];
 		for( unsigned j = 0; j < snds.size(); ++j )
 			delete snds[j];
 	}
@@ -154,10 +153,9 @@ bool ScreenTestSound::Input( const InputEventPlus &input )
 			}
 			case 's':
 			{
-				for( int i = 0; i < nsounds; ++i )
+				for (std::vector<RageSound *> &snds: m_sSoundCopies)
 				{
 					/* Stop copied sounds. */
-					std::vector<RageSound *> &snds = m_sSoundCopies[i];
 					for( unsigned j = 0; j < snds.size(); ++j )
 						snds[j]->Stop();
 				}

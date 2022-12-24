@@ -190,7 +190,7 @@ void Sprite::LoadFromNode( const XNode* pNode )
 	if( !sPath.empty() )
 	{
 		// Load the texture
-		LoadFromTexture( sPath );
+		LoadFromTexture( RageTextureID{sPath} );
 
 		LoadStatesFromTexture();
 
@@ -368,7 +368,7 @@ void Sprite::LoadFromCached( const RString &sDir, const RString &sPath )
 {
 	if( sPath.empty() )
 	{
-		Load( THEME->GetPathG("Common","fallback %s", sDir) );
+		Load( RageTextureID{THEME->GetPathG("Common","fallback %s", sDir)} );
 		return;
 	}
 
@@ -380,9 +380,9 @@ void Sprite::LoadFromCached( const RString &sDir, const RString &sPath )
 	if( TEXTUREMAN->IsTextureRegistered(ID) )
 		Load( ID );
 	else if( IsAFile(sPath) )
-		Load( sPath );
+		Load( RageTextureID{sPath} );
 	else
-		Load( THEME->GetPathG("Common","fallback %s", sDir) );
+		Load( RageTextureID{THEME->GetPathG("Common","fallback %s", sDir)} );
 }
 
 void Sprite::LoadStatesFromTexture()

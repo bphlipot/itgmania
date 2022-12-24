@@ -447,8 +447,9 @@ struct bmsCommandTree
 				}
 				else
 					LOG->UserLog("Song file", path, "Line %d: #else without matching #if chain.\n", line);
-			} else
+			} else {
 				LOG->UserLog("Song file", path, "Line %d: #else used at root level.\n", line);
+			}
 		}
 		else if (name == "#elseif")
 		{
@@ -457,10 +458,12 @@ struct bmsCommandTree
 				if (currentNode->parent->conditionType == bmsNodeS::CT_CONDITIONALCHAIN)
 				{
 					currentNode = createElseIfNode(currentNode->parent, atoi(value.c_str()));
-				}else
+				}else {
 					LOG->UserLog("Song file", path, "Line %d: #elseif without matching #if chain.\n", line);
-			}else
+				}
+			}else {
 				LOG->UserLog("Song file", path, "Line %d: #elseif used at root level.\n", line);
+			}
 		}
 		else if (name == "#endif" || name == "#end")
 		{
@@ -599,7 +602,7 @@ class BMSSong {
 	std::map<RString, RString> mapBackground;
 
 public:
-	BMSSong( Song *song );
+	explicit BMSSong( Song *song );
 	int AllocateKeysound( RString filename, RString path );
 	bool GetBackground( RString filename, RString path, RString &bgfile );
 	Song *GetSong();
@@ -1075,17 +1078,17 @@ struct BMSAutoKeysound {
 };
 
 struct bmFrac {
-	bmFrac(long long n, long long d)
+	bmFrac(int64_t n, int64_t d)
 		:num(n), den(d)
 	{}
-	long long num;
-	long long den;
+	int64_t num;
+	int64_t den;
 };
 
 bmFrac toFraction(double f)
 {
 	double df;
-	long long upper = 1LL, lower = 1LL;
+	int64_t upper = 1LL, lower = 1LL;
 	df = 1;
 
 	while (std::abs(df - f) > 0.000001)
@@ -1139,7 +1142,8 @@ bool BMSChartReader::ReadNoteData()
 			transform[1] = BMS_RAW_P1_KEY3;
 			transform[2] = BMS_RAW_P1_KEY5;
 			transform[3] = BMS_RAW_P1_TURN;
-		} else // myo2/rd style 4k chart
+		}
+		else // myo2/rd style 4k chart
 		{
 			transform[0] = BMS_RAW_P1_TURN;
 			transform[1] = BMS_RAW_P1_KEY1;
@@ -1168,7 +1172,8 @@ bool BMSChartReader::ReadNoteData()
 			transform[3] = BMS_RAW_P1_KEY4;
 			transform[4] = BMS_RAW_P1_KEY5;
 			transform[5] = BMS_RAW_P1_TURN;
-		} else // Linear solo layout
+		}
+		else // Linear solo layout
 		{
 			transform[0] = BMS_RAW_P1_KEY1;
 			transform[1] = BMS_RAW_P1_KEY2;
@@ -1306,8 +1311,8 @@ bool BMSChartReader::ReadNoteData()
 			// measure size adjustment
 			{
 				bmFrac numFrac = toFraction(measureSize);
-				long long num = numFrac.num;
-				long long den = 4 * numFrac.den;
+				int64_t num = numFrac.num;
+				int64_t den = 4 * numFrac.den;
 
 				while ( num % 2 == 0 && den % 2 == 0 && den > 4  ) { // Both are multiples of 2
 					num /= 2;

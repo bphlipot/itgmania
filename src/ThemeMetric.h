@@ -51,7 +51,7 @@ public:
 	 * call Load() to set them.  This is done to allow initializing cached metrics
 	 * in one place for classes that don't receive their m_sName in the constructor
 	 * (everything except screens). */
-	ThemeMetric( const RString& sGroup = "", const RString& sName = "" ):
+	explicit ThemeMetric( const RString& sGroup = "", const RString& sName = "" ):
 		m_sGroup( sGroup ),
 		m_sName( sName ),
 		m_Value(), m_currentValue(T()), m_bCallEachTime(false)
@@ -228,7 +228,7 @@ class ThemeMetric2D : public IThemeMetric
 	std::vector<ThemeMetricTVector> m_metric;
 
 public:
-	ThemeMetric2D( const RString& sGroup = "", MetricName2D pfn = nullptr, size_t N = 0, size_t M = 0 )
+	explicit ThemeMetric2D( const RString& sGroup = "", MetricName2D pfn = nullptr, size_t N = 0, size_t M = 0 )
 	{
 		Load( sGroup, pfn, N, M );
 	}
@@ -269,7 +269,7 @@ class ThemeMetricMap : public IThemeMetric
 	std::map<RString,ThemeMetricT> m_metric;
 
 public:
-	ThemeMetricMap( const RString& sGroup = "", MetricNameMap pfn = nullptr, const std::vector<RString> vsValueNames = std::vector<RString>() )
+	explicit ThemeMetricMap( const RString& sGroup = "", MetricNameMap pfn = nullptr, const std::vector<RString> vsValueNames = std::vector<RString>() )
 	{
 		Load( sGroup, pfn, vsValueNames );
 	}

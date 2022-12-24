@@ -3,13 +3,14 @@
 #ifndef RAGE_UTIL_WORKER_THREAD_H
 #define RAGE_UTIL_WORKER_THREAD_H
 
+#include "global.h"
 #include "RageThreads.h"
 #include "RageTimer.h"
 
 class RageWorkerThread
 {
 public:
-	RageWorkerThread( const RString &sName );
+	explicit RageWorkerThread( const RString &sName );
 	virtual ~RageWorkerThread();
 
 	/* Call SetTimeout(10) to start a timeout period of 10 seconds.  This is not a

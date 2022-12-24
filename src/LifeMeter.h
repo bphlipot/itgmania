@@ -12,16 +12,16 @@ class PlayerStageStats;
 class LifeMeter : public ActorFrame
 {
 public:
-	LifeMeter() {};
-	virtual ~LifeMeter() {};
+	LifeMeter() {}
+	virtual ~LifeMeter() {}
 	
 	virtual void Load( const PlayerState *pPlayerState, PlayerStageStats *pPlayerStageStats )
 	{
 		m_pPlayerState = pPlayerState;
 		m_pPlayerStageStats = pPlayerStageStats;
 	}
-	virtual void OnLoadSong() {};
-	virtual void OnSongEnded() {};
+	virtual void OnLoadSong() {}
+	virtual void OnSongEnded() {}
 	/**
 	 * @brief Change life after receiving a tap note grade.
 	 *

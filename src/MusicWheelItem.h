@@ -36,7 +36,7 @@ const RString& MusicWheelItemTypeToString( MusicWheelItemType i );
 class MusicWheelItem : public WheelItemBase
 {
 public:
-	MusicWheelItem(RString sType = "MusicWheelItem");
+	explicit MusicWheelItem(RString sType = "MusicWheelItem");
 	MusicWheelItem( const MusicWheelItem &cpy );
 	virtual ~MusicWheelItem();
 	virtual MusicWheelItem *Copy() const { return new MusicWheelItem(*this); }

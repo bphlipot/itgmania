@@ -5,9 +5,9 @@
 #include "RageLog.h"
 #include "RageUtil.h"
 #include <memory>
+#include <zlib.h>
 
 #if defined(_WINDOWS)
-#include "zlib.h"
 #if defined(_MSC_VER)
 #if defined(BINARY_ZDL)
 #pragma comment(lib, "zdll.lib")
@@ -15,10 +15,6 @@
 // #pragma comment(lib, "zlib.lib")
 #endif
 #endif
-#elif defined(MACOSX)
-#include "zlib.h"
-#else
-#include <zlib.h>
 #endif
 
 RageFileObjInflate::RageFileObjInflate( RageFileBasic *pFile, int iUncompressedSize )

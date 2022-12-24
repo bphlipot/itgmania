@@ -554,7 +554,7 @@ RString LowLevelWindow_X11::TryVideoMode( const VideoModeParams &p, bool &bNewDe
 
 	}
 
-	CurrentParams = p;
+	CurrentParams = ActualVideoModeParams{p};
 	CurrentParams.windowWidth = windowWidth;
 	CurrentParams.windowHeight = windowHeight;
 	CurrentParams.renderOffscreen = renderOffscreen;

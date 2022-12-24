@@ -176,7 +176,7 @@ struct NoteSkinAndPath
 
 struct NoteResource
 {
-	NoteResource( const NoteSkinAndPath &nsap ): m_nsap(nsap)
+	explicit NoteResource( const NoteSkinAndPath &nsap ): m_nsap(nsap)
 	{
 		m_iRefCount = 0;
 		m_pActor = nullptr;
@@ -827,8 +827,7 @@ void NoteDisplay::DrawHoldPart(std::vector<Sprite*> &vpSpr,
 			// bottomcap frame height. (translated by hanubeki)
 			if (offset>0){
 				add_to_tex_coord = SCALE(offset, 0.0f, unzoomed_frame_height, 0.0f, 1.0f);
-			}
-			else{
+			} else{
 				add_to_tex_coord = 0.0f;
 			}
 		}

@@ -304,7 +304,7 @@ void DirectFilenameDB::PopulateFileSet( FileSet &fs, const RString &path )
 	static const RString IGNORE_MARKER_BEGINNING = "ignore-";
 
 	std::vector<RString> vsFilesToRemove;
-	for( std::set<File>::iterator iter = fs.files.lower_bound(IGNORE_MARKER_BEGINNING);
+	for( std::set<File>::iterator iter = fs.files.lower_bound(File{IGNORE_MARKER_BEGINNING});
 		 iter != fs.files.end(); 
 		 ++iter )
 	{

@@ -86,7 +86,8 @@ namespace
 		if (specs)
 		{
 			lua_pushinteger( L, specs->size() );
-		} else
+		}
+		else
 		{
 			lua_pushinteger( L, 0 );
 		}

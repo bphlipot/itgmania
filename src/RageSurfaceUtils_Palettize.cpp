@@ -1,4 +1,4 @@
-/* from http://www.libpng.org/pub/png/apps/pngquant.html */
+// from http://www.libpng.org/pub/png/apps/pngquant.html
 
 #include "global.h"
 #include "RageSurfaceUtils_Palettize.h"
@@ -235,7 +235,7 @@ void RageSurfaceUtils::Palettize( RageSurface *&pImg, int iColors, bool bDither 
 						pSquareTable[c] = c*c;
 				}
 
-				long dist = 2000000000;
+				int32_t dist = 2000000000;
 				for( int i = 0; i < newcolors; ++i )
 				{
 					const uint8_t *colors2 = acolormap[i].acolor;
@@ -263,7 +263,7 @@ void RageSurfaceUtils::Palettize( RageSurface *&pImg, int iColors, bool bDither 
 				{
 					for( int c = 0; c < 4; ++c )
 					{
-						long err = (sc[c] - (long)acolormap[ind].acolor[c])*FS_SCALE;
+						int32_t err = (sc[c] - (int32_t)acolormap[ind].acolor[c])*FS_SCALE;
 						thiserr[col + 2].c[c] += ( err * 7 ) / 16;
 						nexterr[col    ].c[c] += ( err * 3 ) / 16;
 						nexterr[col + 1].c[c] += ( err * 5 ) / 16;
@@ -272,7 +272,7 @@ void RageSurfaceUtils::Palettize( RageSurface *&pImg, int iColors, bool bDither 
 				} else {
 					for( int c = 0; c < 4; ++c )
 					{
-						long err = (sc[c] - (long)acolormap[ind].acolor[c])*FS_SCALE;
+						int32_t err = (sc[c] - (int32_t)acolormap[ind].acolor[c])*FS_SCALE;
 						thiserr[col    ].c[c] += ( err * 7 ) / 16;
 						nexterr[col + 2].c[c] += ( err * 3 ) / 16;
 						nexterr[col + 1].c[c] += ( err * 5 ) / 16;
@@ -442,7 +442,7 @@ static acolorhist_item *mediancut( acolorhist_item *achv, int colors, int sum, i
 #ifdef REP_AVERAGE_COLORS
 		int indx = bv[bi].ind;
 		int clrs = bv[bi].colors;
-		long r = 0, g = 0, b = 0, a = 0;
+		int32_t r = 0, g = 0, b = 0, a = 0;
 
 		for ( i = 0; i < clrs; ++i )
 		{
@@ -460,7 +460,7 @@ static acolorhist_item *mediancut( acolorhist_item *achv, int colors, int sum, i
 #ifdef REP_AVERAGE_PIXELS
 		int indx = bv[bi].ind;
 		int clrs = bv[bi].colors;
-		long r = 0, g = 0, b = 0, a = 0, lSum = 0;
+		int32_t r = 0, g = 0, b = 0, a = 0, lSum = 0;
 
 		for ( int i = 0; i < clrs; ++i )
 		{
@@ -471,13 +471,13 @@ static acolorhist_item *mediancut( acolorhist_item *achv, int colors, int sum, i
 			lSum += achv[indx + i].value;
 		}
 		r = r / lSum;
-		r = std::min( r, (long) maxval );
+		r = std::min( r, (int32_t) maxval );
 		g = g / lSum;
-		g = std::min( g, (long) maxval );
+		g = std::min( g, (int32_t) maxval );
 		b = b / lSum;
-		b = std::min( b, (long) maxval );
+		b = std::min( b, (int32_t) maxval );
 		a = a / lSum;
-		a = std::min( a, (long) maxval );
+		a = std::min( a, (int32_t) maxval );
 		PAM_ASSIGN( acolormap[bi].acolor, (uint8_t)r, (uint8_t)g, (uint8_t)b, (uint8_t)a );
 #endif // REP_AVERAGE_PIXELS
 	}

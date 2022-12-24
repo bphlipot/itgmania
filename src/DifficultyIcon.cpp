@@ -21,7 +21,7 @@ DifficultyIcon::DifficultyIcon()
 
 bool DifficultyIcon::Load( RString sPath )
 {
-	Sprite::Load( sPath );
+	Sprite::Load( RageTextureID{sPath} );
 	int iStates = GetNumStates();
 	bool bWarn = iStates != NUM_Difficulty  &&  iStates != NUM_Difficulty*2;
 	if( sPath.find("_blank") != std::string::npos )

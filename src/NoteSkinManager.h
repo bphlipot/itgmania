@@ -63,7 +63,7 @@ extern NoteSkinManager*	NOTESKIN;	// global and accessible from anywhere in our 
 class LockNoteSkin
 {
 public:
-	LockNoteSkin( const RString &sNoteSkin ) { ASSERT( NOTESKIN->GetCurrentNoteSkin().empty() ); NOTESKIN->SetCurrentNoteSkin( sNoteSkin ); }
+	explicit LockNoteSkin( const RString &sNoteSkin ) { ASSERT( NOTESKIN->GetCurrentNoteSkin().empty() ); NOTESKIN->SetCurrentNoteSkin( sNoteSkin ); }
 	~LockNoteSkin() { NOTESKIN->SetCurrentNoteSkin( RString() ); }
 };
 

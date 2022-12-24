@@ -20,7 +20,7 @@ bool ieq( const RString &a, const RString &b );
 class RageFileManager
 {
 public:
-	RageFileManager( const RString &argv0 );
+	explicit RageFileManager( const RString &argv0 );
 	~RageFileManager();
 	void MountInitialFilesystems();
 	void MountUserFilesystems();

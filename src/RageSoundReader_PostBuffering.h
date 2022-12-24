@@ -3,12 +3,13 @@
 #ifndef RAGE_SOUND_READER_POST_BUFFERING_H
 #define RAGE_SOUND_READER_POST_BUFFERING_H
 
+#include "global.h"
 #include "RageSoundReader_Filter.h"
 
 class RageSoundReader_PostBuffering: public RageSoundReader_Filter
 {
 public:
-	RageSoundReader_PostBuffering( RageSoundReader *pSource );
+	explicit RageSoundReader_PostBuffering( RageSoundReader *pSource );
 	RageSoundReader_PostBuffering *Copy() const { return new RageSoundReader_PostBuffering(*this); }
 	static void SetMasterVolume( float fVolume );
 	virtual int Read( float *pBuf, int iFrames );

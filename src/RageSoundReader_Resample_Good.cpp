@@ -137,7 +137,7 @@ template<typename T>
 class AlignedBuffer
 {
 public:
-	AlignedBuffer( int iSize )
+	explicit AlignedBuffer( int iSize )
 	{
 		m_iSize = iSize;
 		m_pBuf = new T[m_iSize];
@@ -166,7 +166,7 @@ struct PolyphaseFilter
 {
 	struct State
 	{
-		State( int iUpFactor ):
+		explicit State( int iUpFactor ):
 			m_fBuf( L * 2 )
 		{
 			m_iPolyIndex = iUpFactor-1;
@@ -185,7 +185,7 @@ struct PolyphaseFilter
 	};
 	friend struct State;
 
-	PolyphaseFilter( int iUpFactor ):
+	explicit PolyphaseFilter( int iUpFactor ):
 		m_pPolyphase( L*iUpFactor )
 	{
 		m_iUpFactor = iUpFactor;

@@ -1,3 +1,4 @@
+#include "XmlToLua.h"
 #include "global.h"
 #include "ActorUtil.h"
 #include "IniFile.h"

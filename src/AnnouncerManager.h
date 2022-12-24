@@ -25,7 +25,7 @@ public:
 	/**
 	 * @brief Retrieve the current announcer's name.
 	 * @return the current announcer's name. */
-	RString GetCurAnnouncerName() const { return m_sCurAnnouncerName; };
+	RString GetCurAnnouncerName() const { return m_sCurAnnouncerName; }
 	void NextAnnouncer();
 
 	RString GetPathTo( RString sFolderName );

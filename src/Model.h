@@ -17,7 +17,7 @@ class Model : public Actor
 public:
 	Model();
 	virtual ~Model();
-	virtual Model *Copy() const override;
+	Model *Copy() const override;
 
 	void	Clear();
 	void	Load( const RString &sFile );
@@ -34,27 +34,27 @@ public:
 	void	SetLoop( bool b ) { m_bLoop = b; }
 	void	SetPosition( float fSeconds );
 
-	virtual void	Update( float fDelta ) override;
-	virtual bool	EarlyAbortDraw() const override;
-	virtual void	DrawPrimitives() override;
+	void	Update( float fDelta ) override;
+	bool	EarlyAbortDraw() const override;
+	void	DrawPrimitives() override;
 
 	void	DrawCelShaded();
 	void	SetCelShading( bool bShading ) { m_bDrawCelShaded = bShading; }
 
-	virtual int GetNumStates() const override;
-	virtual void SetState( int iNewState ) override;
-	virtual float GetAnimationLengthSeconds() const override
+	int GetNumStates() const override;
+	void SetState( int iNewState ) override;
+	float GetAnimationLengthSeconds() const override
 	{ return m_animation_length_seconds; }
 	virtual void RecalcAnimationLengthSeconds();
-	virtual void SetSecondsIntoAnimation( float fSeconds ) override;
+	void SetSecondsIntoAnimation( float fSeconds ) override;
 
-	RString		GetDefaultAnimation() const { return m_sDefaultAnimation; };
+	RString		GetDefaultAnimation() const { return m_sDefaultAnimation; }
 	void		SetDefaultAnimation( RString sAnimation, float fPlayRate = 1 );
 
 	bool	MaterialsNeedNormals() const;
 
 	// Lua
-	virtual void PushSelf( lua_State *L ) override;
+	void PushSelf( lua_State *L ) override;
 
 	Model& operator=(const Model& rhs) = delete;
 

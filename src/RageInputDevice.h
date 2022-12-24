@@ -343,8 +343,8 @@ public:
 	RString ToString() const;
 	bool FromString( const RString &s );
 
-	bool IsValid() const { return device != InputDevice_Invalid; };
-	void MakeInvalid() { device = InputDevice_Invalid; };
+	bool IsValid() const { return device != InputDevice_Invalid; }
+	void MakeInvalid() { device = InputDevice_Invalid; }
 
 	bool IsJoystick() const { return ::IsJoystick(device); }
 	bool IsMouse() const { return ::IsMouse(device); }
